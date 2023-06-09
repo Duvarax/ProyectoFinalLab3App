@@ -25,6 +25,8 @@ public class PerfilFragment extends Fragment {
 
     private FragmentPerfilBinding binding;
     private Handler sliderHandler = new Handler();
+    private Runnable sliderCambio;
+    private ArrayList<String> listaImagenes = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -34,11 +36,25 @@ public class PerfilFragment extends Fragment {
         binding = FragmentPerfilBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         binding.imageView3.setImageResource(R.drawable.palanca_icon);
-        ArrayList<String> listaImagenes = new ArrayList<>();
         listaImagenes.add("https://generacionxbox.com/wp-content/uploads/2021/04/epic-games-store-juegos-gratis.jpg");
         listaImagenes.add("https://img.freepik.com/vector-gratis/conjunto-oscuro-elementos-boton-piedra-juego-barra-progreso-brillantes-diferentes-formas-botones-juegos-aplicaciones_1150-39977.jpg");
         listaImagenes.add("https://i.pinimg.com/originals/3a/a4/ea/3aa4eaef2581fcfd78b824410bf9d61e.jpg");
-        PerfilSliderAdapter adapter = new PerfilSliderAdapter(root.getContext(), listaImagenes, getLayoutInflater(), binding.carousel, getActivity());
+
+
+
+        return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        sliderCambio = new Runnable() {
+            @Override
+            public void run() {
+                binding.carousel.setCurrentItem(binding.carousel.getCurrentItem() + 1);
+            }
+        };
+        PerfilSliderAdapter adapter = new PerfilSliderAdapter(binding.getRoot().getContext(), listaImagenes, getLayoutInflater(), binding.carousel, getActivity());
         binding.carousel.setAdapter(adapter);
 
         binding.carousel.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -51,28 +67,28 @@ public class PerfilFragment extends Fragment {
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 sliderHandler.removeCallbacks(sliderCambio);
-                sliderHandler.postDelayed(sliderCambio, 3000);
+                sliderHandler.postDelayed(sliderCambio, 5000);
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
                 super.onPageScrollStateChanged(state);
             }
+
         });
 
-
-        return root;
     }
 
-    private Runnable sliderCambio = new Runnable() {
-        @Override
-        public void run() {
-            binding.carousel.setCurrentItem(binding.carousel.getCurrentItem() + 1);
-        }
-    };
+    @Override
+    public void onPause() {
+        super.onPause();
+        sliderHandler.removeCallbacks(sliderCambio);
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        sliderHandler.removeCallbacks(sliderCambio);
     }
 }
