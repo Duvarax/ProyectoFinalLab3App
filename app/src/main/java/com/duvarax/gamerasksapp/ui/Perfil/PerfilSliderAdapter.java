@@ -49,7 +49,7 @@ public class PerfilSliderAdapter extends RecyclerView.Adapter<PerfilSliderAdapte
         holder.imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(activity,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_home);
+                Navigation.findNavController(activity,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_juegos);
             }
         });
         if (position == listaImagenes.size() - 2){

@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="yellowMain">#f5ff00</color>
     <color name="blueMain">#002549</color>
+    <color name="textOff">#8B8F63</color>
 </resources>

@@ -6,10 +6,10 @@
     app:startDestination="@id/navigation_perfil">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.duvarax.gamerasksapp.ui.home.HomeFragment"
+        android:id="@+id/navigation_juegos"
+        android:name="com.duvarax.gamerasksapp.ui.Juegos.JuegosFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_juegos" />
 
     <fragment
         android:id="@+id/navigation_perfil"
