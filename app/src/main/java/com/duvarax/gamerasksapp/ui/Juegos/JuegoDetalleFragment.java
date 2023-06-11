@@ -12,11 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.duvarax.gamerasksapp.R;
+import com.duvarax.gamerasksapp.databinding.FragmentJuegoDetalleBinding;
 
 public class JuegoDetalleFragment extends Fragment {
 
     private JuegoDetalleViewModel mViewModel;
+    private FragmentJuegoDetalleBinding binding;
 
     public static JuegoDetalleFragment newInstance() {
         return new JuegoDetalleFragment();
@@ -25,7 +28,13 @@ public class JuegoDetalleFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_juego_detalle, container, false);
+        binding = FragmentJuegoDetalleBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+        Glide.with(getContext())
+                .load("https://generacionxbox.com/wp-content/uploads/2021/04/epic-games-store-juegos-gratis.jpg")
+                .into(binding.imageView4);
+        return root;
     }
 
     @Override

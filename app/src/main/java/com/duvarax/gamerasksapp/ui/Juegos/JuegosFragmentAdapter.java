@@ -1,5 +1,6 @@
 package com.duvarax.gamerasksapp.ui.Juegos;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -20,11 +22,13 @@ public class JuegosFragmentAdapter extends RecyclerView.Adapter<JuegosFragmentAd
     private Context context;
     private LayoutInflater inflater;
     private ArrayList<Juego> listaJuegos;
+    private Activity activity;
 
-    public JuegosFragmentAdapter(Context context, LayoutInflater inflater, ArrayList<Juego> listaJuegos) {
+    public JuegosFragmentAdapter(Context context, LayoutInflater inflater, ArrayList<Juego> listaJuegos, Activity activity) {
         this.context = context;
         this.inflater = inflater;
         this.listaJuegos = listaJuegos;
+        this.activity = activity;
     }
 
     @NonNull
@@ -44,6 +48,7 @@ public class JuegosFragmentAdapter extends RecyclerView.Adapter<JuegosFragmentAd
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "Enviar al juego", Toast.LENGTH_SHORT).show();
+                Navigation.findNavController(activity,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_detalle_juego);
             }
         });
     }

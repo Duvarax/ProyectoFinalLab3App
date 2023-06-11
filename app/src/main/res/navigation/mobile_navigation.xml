@@ -9,7 +9,11 @@
         android:id="@+id/navigation_juegos"
         android:name="com.duvarax.gamerasksapp.ui.Juegos.JuegosFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_juegos" />
+        tools:layout="@layout/fragment_juegos" >
+        <action
+            android:id="@+id/action_navigation_juegos_to_navigation_detalle_juego"
+            app:destination="@id/navigation_detalle_juego" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_perfil"
@@ -19,8 +23,17 @@
         tools:layout="@layout/fragment_perfil" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.duvarax.gamerasksapp.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_preguntas"
+        android:name="com.duvarax.gamerasksapp.ui.Preguntas.PreguntasFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_preguntas" />
+    <fragment
+        android:id="@+id/navigation_detalle_juego"
+        android:name="com.duvarax.gamerasksapp.ui.Juegos.JuegoDetalleFragment"
+        android:label="Juego"
+        tools:layout="@layout/fragment_juego_detalle">
+        <action
+            android:id="@+id/action_navigation_detalle_juego_to_navigation_juegos"
+            app:destination="@id/navigation_juegos" />
+    </fragment>
 </navigation>
