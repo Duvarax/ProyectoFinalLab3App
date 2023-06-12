@@ -2,131 +2,116 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
+    tools:context=".ui.Preguntas.CambiarClaveFragment"
     android:background="@color/blueMain">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
+        android:id="@+id/constraintLayout10"
         android:layout_width="351dp"
         android:layout_height="62dp"
-        android:layout_marginTop="56dp"
-        android:background="@drawable/rounded_border"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/rounded_border_solid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+        app:layout_constraintTop_toBottomOf="@+id/textView17">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/oswald_regular"
-            android:text="Clave:"
+            android:text="Clave actual:"
             android:textColor="#000000"
-            android:textSize="24sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/etComentario"
-            android:layout_width="250dp"
-            android:layout_height="47dp"
+            android:id="@+id/etCambiarClaveAntigua"
+            android:layout_width="222dp"
+            android:layout_height="46dp"
             android:backgroundTint="@color/blueMain"
             android:ems="10"
             android:fontFamily="@font/oswald_regular"
-            android:hint="Ingrese su Clave"
+            android:hint="Ingrese la clave actual"
             android:inputType="textPersonName"
             android:textColor="@color/blueMain"
             android:textColorHint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintStart_toEndOf="@+id/textView14"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/st_simplesquare"
-        android:text="GamersAsks"
+        android:text="Cambiar contraseña"
         android:textColor="@color/yellowMain"
-        android:textSize="34sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="351dp"
-        android:layout_height="261dp"
-        android:layout_marginTop="4dp"
-        android:backgroundTint="@color/yellowMain"
-        android:scaleType="centerCrop"
-
-        android:src="@drawable/joystick_icon2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:srcCompat="@drawable/joystick_icon2" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/constraintLayout11"
         android:layout_width="351dp"
         android:layout_height="62dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/rounded_border"
+        android:layout_marginTop="90dp"
+        android:background="@drawable/rounded_border_solid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout10">
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/oswald_regular"
-            android:text="Email:"
+            android:text="Clave nueva:"
             android:textColor="#000000"
-            android:textSize="24sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/etEmailLogin"
-            android:layout_width="250dp"
-            android:layout_height="44dp"
+            android:id="@+id/etCambiarClaveNueva"
+            android:layout_width="222dp"
+            android:layout_height="46dp"
             android:backgroundTint="@color/blueMain"
             android:ems="10"
             android:fontFamily="@font/oswald_regular"
-            android:hint="Ingrese su Email"
+            android:hint="Ingrese la clave nueva"
             android:inputType="textPersonName"
             android:textColor="@color/blueMain"
             android:textColorHint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView7"
+            app:layout_constraintStart_toEndOf="@+id/textView15"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnConfirmarCambioClave"
         android:layout_width="157dp"
         android:layout_height="58dp"
+        android:layout_marginTop="100dp"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/oswald_regular"
-        android:text="Ingresar"
+        android:text="Confirmar"
         android:textColor="@color/blueMain"
         app:circularflow_defaultRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
-
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout11" />
 </androidx.constraintlayout.widget.ConstraintLayout>

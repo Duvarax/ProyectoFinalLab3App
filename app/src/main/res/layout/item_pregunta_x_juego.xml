@@ -13,7 +13,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             app:civ_border_width="2dp"
             app:civ_border_color="@color/yellowMain"
-            android:id="@+id/civUserPregunta"
+            android:id="@+id/civUserPreguntaList"
             android:layout_width="83dp"
             android:layout_height="80dp"
             android:layout_marginTop="16dp"
@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btnRespuestasXPreguntaXJuego"
+            android:id="@+id/btnDetallePregunta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

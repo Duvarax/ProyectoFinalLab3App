@@ -81,10 +81,10 @@ public class PreguntasXJuegoFragmentAdapter extends RecyclerView.Adapter<Pregunt
         Button btRespuestas;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imagenUsuario = itemView.findViewById(R.id.civUserPregunta);
+            imagenUsuario = itemView.findViewById(R.id.civUserPreguntaList);
             captura = itemView.findViewById(R.id.ivCapturaXPreguntaXJuego);
             pregunta = itemView.findViewById(R.id.tvPreguntaXJuego);
-            btRespuestas = itemView.findViewById(R.id.btnRespuestasXPreguntaXJuego);
+            btRespuestas = itemView.findViewById(R.id.btnDetallePregunta);
         }
     }
 }
