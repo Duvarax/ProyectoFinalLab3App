@@ -10,9 +10,21 @@
         android:layout_height="150dp"
         android:background="@drawable/rounded_border_solid">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/yellowMain"
+            android:id="@+id/civUserPregunta"
+            android:layout_width="83dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/lupa_icon"
+            app:layout_constraintEnd_toStartOf="@+id/constraintLayout6"
+            app:layout_constraintHorizontal_bias="0.242"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btnRespuestas"
+            android:id="@+id/btnRespuestasXPreguntaXJuego"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -29,7 +41,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <ImageView
-            android:id="@+id/ivCaptura"
+            android:id="@+id/ivCapturaXPreguntaXJuego"
             android:layout_width="29dp"
             android:layout_height="29dp"
             android:layout_marginBottom="8dp"
@@ -39,37 +51,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/camara_icon" />
 
-        <ImageView
-            android:id="@+id/ivPortadaJuego"
-            android:layout_width="84dp"
-            android:layout_height="81dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:scaleType="fitXY"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout6"
             android:layout_width="263dp"
             android:layout_height="80dp"
             android:background="@drawable/rounded_border_solid"
-            app:layout_constraintBottom_toTopOf="@+id/ivCaptura"
+            app:layout_constraintBottom_toTopOf="@+id/ivCapturaXPreguntaXJuego"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.479"
-            app:layout_constraintStart_toEndOf="@+id/ivPortadaJuego"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.484">
 
             <TextView
-                android:id="@+id/tvPregunta"
+                android:id="@+id/tvPreguntaXJuego"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pregunta"
                 android:fontFamily="@font/oswald_regular"
-                android:textSize="16dp"
+                android:text="Pregunta"
                 android:textColor="@color/blueMain"
+                android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

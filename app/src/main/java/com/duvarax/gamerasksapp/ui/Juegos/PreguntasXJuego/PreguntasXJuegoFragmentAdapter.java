@@ -1,4 +1,4 @@
-package com.duvarax.gamerasksapp.ui.Preguntas;
+package com.duvarax.gamerasksapp.ui.Juegos.PreguntasXJuego;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,13 +19,13 @@ import com.duvarax.gamerasksapp.R;
 
 import java.util.ArrayList;
 
-public class PreguntasFragmentAdapter extends RecyclerView.Adapter<PreguntasFragmentAdapter.ViewHolder> {
+public class PreguntasXJuegoFragmentAdapter extends RecyclerView.Adapter<PreguntasXJuegoFragmentAdapter.ViewHolder> {
     private Context context;
     private LayoutInflater inflater;
     private ArrayList<Pregunta> listaPreguntas;
     private Activity activity;
 
-    public PreguntasFragmentAdapter(Context context, LayoutInflater inflater, ArrayList<Pregunta> listapreguntas, Activity activity) {
+    public PreguntasXJuegoFragmentAdapter(Context context, LayoutInflater inflater, ArrayList<Pregunta> listapreguntas, Activity activity) {
         this.context = context;
         this.inflater = inflater;
         this.listaPreguntas = listapreguntas;
@@ -34,17 +34,17 @@ public class PreguntasFragmentAdapter extends RecyclerView.Adapter<PreguntasFrag
 
     @NonNull
     @Override
-    public PreguntasFragmentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PreguntasXJuegoFragmentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        View root = inflater.inflate(R.layout.item_pregunta_usuario, parent, false);
+        View root = inflater.inflate(R.layout.item_pregunta_x_juego, parent, false);
         return new ViewHolder(root);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PreguntasFragmentAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PreguntasXJuegoFragmentAdapter.ViewHolder holder, int position) {
         Glide.with(context)
-                .load(listaPreguntas.get(position).getJuego().getPortada())
-                .into(holder.portadaJuego);
+                .load(listaPreguntas.get(position).getUsuario().getImagen())
+                .into(holder.imagenUsuario);
 
         holder.pregunta.setText(listaPreguntas.get(position).getTexto());
         if(listaPreguntas.get(position).getCaptura() == null || listaPreguntas.get(position).getCaptura() == ""){
@@ -75,16 +75,16 @@ public class PreguntasFragmentAdapter extends RecyclerView.Adapter<PreguntasFrag
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView portadaJuego;
+        ImageView imagenUsuario;
         ImageView captura;
         TextView pregunta;
         Button btRespuestas;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            portadaJuego = itemView.findViewById(R.id.ivPortadaJuego);
-            captura = itemView.findViewById(R.id.ivCaptura);
-            pregunta = itemView.findViewById(R.id.tvPregunta);
-            btRespuestas = itemView.findViewById(R.id.btnRespuestas);
+            imagenUsuario = itemView.findViewById(R.id.civUserPregunta);
+            captura = itemView.findViewById(R.id.ivCapturaXPreguntaXJuego);
+            pregunta = itemView.findViewById(R.id.tvPreguntaXJuego);
+            btRespuestas = itemView.findViewById(R.id.btnRespuestasXPreguntaXJuego);
         }
     }
 }

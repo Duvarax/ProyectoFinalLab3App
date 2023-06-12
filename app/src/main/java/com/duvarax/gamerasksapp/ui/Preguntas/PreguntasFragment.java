@@ -30,11 +30,13 @@ public class PreguntasFragment extends Fragment {
         binding = FragmentPreguntasBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         ArrayList<Pregunta> listaPreguntas = new ArrayList<Pregunta>();
-        listaPreguntas.add(new Pregunta(1,"Pregunta", "10/06/2023", new Usuario(1, "claudio", "","","","","",""), new Juego(1, "",""," https://generacionxbox.com/wp-content/uploads/2021/04/epic-games-store-juegos-gratis.jpg", "", ""), ""));
+        listaPreguntas.add(new Pregunta(1,"Pregunta", "10/06/2023", new Usuario(1, "claudio", "","","","","",""), new Juego(1, "","","https://generacionxbox.com/wp-content/uploads/2021/04/epic-games-store-juegos-gratis.jpg", "", ""), ""));
         PreguntasFragmentAdapter adapter = new PreguntasFragmentAdapter(root.getContext(), getLayoutInflater(),listaPreguntas, getActivity());
         binding.rvListaPreguntas.setAdapter(adapter);
         GridLayoutManager grid = new GridLayoutManager(root.getContext(), 1, GridLayoutManager.VERTICAL, false);
         binding.rvListaPreguntas.setLayoutManager(grid);
+
+
         return root;
     }
 

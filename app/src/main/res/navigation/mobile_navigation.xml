@@ -35,5 +35,28 @@
         <action
             android:id="@+id/action_navigation_detalle_juego_to_navigation_juegos"
             app:destination="@id/navigation_juegos" />
+        <action
+            android:id="@+id/action_navigation_detalle_juego_to_preguntasXJuegoFragment"
+            app:destination="@id/navigation_preguntas_x_juego" />
+        <action
+            android:id="@+id/action_navigation_detalle_juego_to_navigation_hacer_pregunta"
+            app:destination="@id/navigation_hacer_pregunta" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_preguntas_x_juego"
+        android:name="com.duvarax.gamerasksapp.ui.Juegos.PreguntasXJuego.PreguntasXJuegoFragment"
+        android:label="PreguntasXJuegoFragment" >
+        <action
+            android:id="@+id/action_preguntasXJuegoFragment_to_navigation_detalle_juego"
+            app:destination="@id/navigation_detalle_juego" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_hacer_pregunta"
+        android:name="com.duvarax.gamerasksapp.ui.Preguntas.HacerPreguntaFragment"
+        android:label="fragment_hacer_pregunta"
+        tools:layout="@layout/fragment_hacer_pregunta" >
+        <action
+            android:id="@+id/action_navigation_hacer_pregunta_to_navigation_detalle_juego"
+            app:destination="@id/navigation_detalle_juego" />
     </fragment>
 </navigation>
