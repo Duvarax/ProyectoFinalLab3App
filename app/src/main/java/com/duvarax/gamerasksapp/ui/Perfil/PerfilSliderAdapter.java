@@ -2,6 +2,7 @@ package com.duvarax.gamerasksapp.ui.Perfil;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
+import com.duvarax.gamerasksapp.Models.Juego;
 import com.duvarax.gamerasksapp.R;
 
 import java.util.List;
@@ -20,14 +22,14 @@ import java.util.List;
 public class PerfilSliderAdapter extends RecyclerView.Adapter<PerfilSliderAdapter.ViewHolder> {
 
     private Context context;
-    private List<String> listaImagenes;
+    private List<Juego> listaJuegos;
     private LayoutInflater inflater;
     private ViewPager2 viewpager2;
     private Activity activity;
 
-    public PerfilSliderAdapter(Context context, List<String> listaImagenes, LayoutInflater inflater, ViewPager2 viewpager2, Activity activity) {
+    public PerfilSliderAdapter(Context context, List<Juego> listaJuegos, LayoutInflater inflater, ViewPager2 viewpager2, Activity activity) {
         this.context = context;
-        this.listaImagenes = listaImagenes;
+        this.listaJuegos = listaJuegos;
         this.inflater = inflater;
         this.viewpager2 = viewpager2;
         this.activity = activity;
@@ -44,28 +46,30 @@ public class PerfilSliderAdapter extends RecyclerView.Adapter<PerfilSliderAdapte
     @Override
     public void onBindViewHolder(@NonNull PerfilSliderAdapter.ViewHolder holder, int position) {
         Glide.with(context)
-                .load(listaImagenes.get(position))
+                .load(listaJuegos.get(position).getPortada())
                 .into(holder.imagen);
         holder.imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(activity,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_juegos);
+                Bundle juego = new Bundle();
+                juego.putSerializable("juego", listaJuegos.get(position));
+                Navigation.findNavController(activity,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_juegos, juego);
             }
         });
-        if (position == listaImagenes.size() - 2){
+        if (position == listaJuegos.size() - 2){
             viewpager2.post(runnable);
         }
     }
 
     @Override
     public int getItemCount() {
-        return listaImagenes.size();
+        return listaJuegos.size();
     }
 
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            listaImagenes.addAll(listaImagenes);
+            listaJuegos.addAll(listaJuegos);
             notifyDataSetChanged();
         }
     };

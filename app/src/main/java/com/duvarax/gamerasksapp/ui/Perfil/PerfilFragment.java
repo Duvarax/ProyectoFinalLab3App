@@ -10,10 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.duvarax.gamerasksapp.MenuActivity;
+import com.duvarax.gamerasksapp.Models.Juego;
+import com.duvarax.gamerasksapp.Models.Usuario;
 import com.duvarax.gamerasksapp.R;
 import com.duvarax.gamerasksapp.databinding.FragmentPerfilBinding;
 
@@ -24,9 +28,9 @@ import java.util.List;
 public class PerfilFragment extends Fragment {
 
     private FragmentPerfilBinding binding;
+    private PerfilViewModel mv;
     private Handler sliderHandler = new Handler();
     private Runnable sliderCambio;
-    private ArrayList<String> listaImagenes = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -34,12 +38,51 @@ public class PerfilFragment extends Fragment {
 
 
         binding = FragmentPerfilBinding.inflate(inflater, container, false);
+        mv = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PerfilViewModel.class);
         View root = binding.getRoot();
         binding.imageView3.setImageResource(R.drawable.palanca_icon);
-        listaImagenes.add("https://generacionxbox.com/wp-content/uploads/2021/04/epic-games-store-juegos-gratis.jpg");
-        listaImagenes.add("https://img.freepik.com/vector-gratis/conjunto-oscuro-elementos-boton-piedra-juego-barra-progreso-brillantes-diferentes-formas-botones-juegos-aplicaciones_1150-39977.jpg");
-        listaImagenes.add("https://i.pinimg.com/originals/3a/a4/ea/3aa4eaef2581fcfd78b824410bf9d61e.jpg");
 
+
+
+        mv.getUsuarioLogeado().observe(getActivity(), new Observer<Usuario>() {
+            @Override
+            public void onChanged(Usuario usuario) {
+                binding.tvNombrePerfil.setText(usuario.getNombre());
+                binding.tvEmailPerfil.setText(usuario.getEmail());
+                binding.tvNombreUsuarioPerfil.setText(usuario.getNombreUsuario());
+            }
+        });
+        mv.setUsuarioLogeado();
+
+        mv.getListaRecientes().observe(getActivity(), new Observer<ArrayList<Juego>>() {
+            @Override
+            public void onChanged(ArrayList<Juego> strings) {
+                PerfilSliderAdapter adapter = new PerfilSliderAdapter(getContext(), strings, getLayoutInflater(),binding.carousel, getActivity());
+                binding.carousel.setAdapter(adapter);
+                binding.carousel.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                        super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+                        super.onPageSelected(position);
+                        sliderHandler.removeCallbacks(sliderCambio);
+                        sliderHandler.postDelayed(sliderCambio, 5000);
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+                        super.onPageScrollStateChanged(state);
+                    }
+
+                });
+
+            }
+        });
+
+        mv.setListaJuegosRecientes();
 
 
         return root;
@@ -54,28 +97,7 @@ public class PerfilFragment extends Fragment {
                 binding.carousel.setCurrentItem(binding.carousel.getCurrentItem() + 1);
             }
         };
-        PerfilSliderAdapter adapter = new PerfilSliderAdapter(binding.getRoot().getContext(), listaImagenes, getLayoutInflater(), binding.carousel, getActivity());
-        binding.carousel.setAdapter(adapter);
 
-        binding.carousel.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                sliderHandler.removeCallbacks(sliderCambio);
-                sliderHandler.postDelayed(sliderCambio, 5000);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                super.onPageScrollStateChanged(state);
-            }
-
-        });
 
     }
 
