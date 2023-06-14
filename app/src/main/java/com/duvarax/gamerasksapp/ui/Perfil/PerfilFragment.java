@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,7 @@ import com.duvarax.gamerasksapp.Models.Usuario;
 import com.duvarax.gamerasksapp.R;
 import com.duvarax.gamerasksapp.databinding.FragmentPerfilBinding;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +44,7 @@ public class PerfilFragment extends Fragment {
     private PerfilViewModel mv;
     private Handler sliderHandler = new Handler();
     private Runnable sliderCambio;
+    public static int objetivoCamara;
     private static int REQUEST_IMAGE_CAPTURE=1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -59,7 +62,15 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 validaPermisos();
-                tomarFoto(v);
+                tomarFoto(v,R.id.btnCambiarFoto);
+            }
+        });
+
+        binding.btnCambiarPortada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validaPermisos();
+                tomarFoto(v, R.id.btnCambiarPortada);
             }
         });
 
@@ -124,19 +135,23 @@ public class PerfilFragment extends Fragment {
 
         return root;
     }
-    public void tomarFoto(View v){
+    public void tomarFoto(View v, int objetivo){
         Intent takePictureIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            objetivoCamara = objetivo;
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
-    }
 
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        mv.setFoto(requestCode, resultCode, data,REQUEST_IMAGE_CAPTURE);
+        mv.setFoto(requestCode, resultCode, data,REQUEST_IMAGE_CAPTURE, objetivoCamara);
+        objetivoCamara = 0;
     }
+
+
     private boolean validaPermisos() {
 
         if(Build.VERSION.SDK_INT<Build.VERSION_CODES.M){

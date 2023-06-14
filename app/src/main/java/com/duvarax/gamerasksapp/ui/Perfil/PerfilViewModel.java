@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class PerfilViewModel extends AndroidViewModel {
     private MutableLiveData<Usuario> usuarioMutable;
     private MutableLiveData<ArrayList<Juego>> juegosRecientesMutable;
     private MutableLiveData<String> fotoMutable;
+    private MutableLiveData<String> portadaMutable;
 
 
     public PerfilViewModel(@NonNull Application application) {
@@ -74,6 +76,12 @@ public class PerfilViewModel extends AndroidViewModel {
             fotoMutable = new MutableLiveData<>();
         }
         return fotoMutable;
+    }
+    public LiveData<String> getPortadaMutable(){
+        if(portadaMutable == null){
+            portadaMutable = new MutableLiveData<>();
+        }
+        return portadaMutable;
     }
 
     public void setUsuarioLogeado(){
@@ -131,46 +139,87 @@ public class PerfilViewModel extends AndroidViewModel {
         });
     }
 
-    public void setFoto(int requestCode, int resultCode, @Nullable Intent data, int REQUEST_IMAGE_CAPTURE){
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            if (data != null) {
-                Uri imagenUri = data.getData();
-                if (imagenUri != null) {
-                    try {
-                        InputStream inputStream = context.getContentResolver().openInputStream(imagenUri);
-                        byte[] imagenBytes = getBytesFromInputStream(inputStream);
-                        // Enviar la imagen al servidor
-                        SharedPreferences sp = context.getSharedPreferences("token.xml", -1);
-                        String token = sp.getString("token", "");
-                        ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
-                        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), imagenBytes);
-                        MultipartBody.Part imagenParte = MultipartBody.Part.createFormData("imagen", "imagen.jpg", requestBody);
-                        Call<String> cambiarFotoCall = end.cambiarFoto(token, imagenParte);
-                        cambiarFotoCall.enqueue(new Callback<String>() {
-                            @Override
-                            public void onResponse(Call<String> call, Response<String> response) {
-                                if(response.isSuccessful()){
-                                    if (response.body() != null){
+    public void setFoto(int requestCode, int resultCode, @Nullable Intent data, int REQUEST_IMAGE_CAPTURE, int objetivo){
+        if(objetivo == R.id.btnCambiarFoto){
+            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    Uri imagenUri = data.getData();
+                    if (imagenUri != null) {
+                        try {
+                            InputStream inputStream = context.getContentResolver().openInputStream(imagenUri);
+                            byte[] imagenBytes = getBytesFromInputStream(inputStream);
+                            // Enviar la imagen al servidor
+                            SharedPreferences sp = context.getSharedPreferences("token.xml", -1);
+                            String token = sp.getString("token", "");
+                            ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
+                            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), imagenBytes);
+                            MultipartBody.Part imagenParte = MultipartBody.Part.createFormData("imagen", "imagen.jpg", requestBody);
+                            Call<String> cambiarFotoCall = end.cambiarFoto(token, imagenParte);
+                            cambiarFotoCall.enqueue(new Callback<String>() {
+                                @Override
+                                public void onResponse(Call<String> call, Response<String> response) {
+                                    if(response.isSuccessful()){
+                                        if (response.body() != null){
                                             Toast.makeText(context, "Foto cambiada", Toast.LENGTH_SHORT).show();
                                             fotoMutable.postValue(response.body());
+                                        }
+                                    }else{
+                                        Log.d("salida", response.toString());
+                                        Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                                     }
-                                }else{
-                                    Log.d("salida", response.toString());
-                                    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                                 }
-                            }
 
-                            @Override
-                            public void onFailure(Call<String> call, Throwable t) {
+                                @Override
+                                public void onFailure(Call<String> call, Throwable t) {
 
-                            }
-                        });
-                    } catch (IOException e) {
-                        Log.d("salida", e.toString());
+                                }
+                            });
+                        } catch (IOException e) {
+                            Log.d("salida", e.toString());
+                        }
+                    }
+                }
+            }
+        }else{
+            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    Uri imagenUri = data.getData();
+                    if (imagenUri != null) {
+                        try {
+                            InputStream inputStream = context.getContentResolver().openInputStream(imagenUri);
+                            byte[] imagenBytes = getBytesFromInputStream(inputStream);
+                            // Enviar la imagen al servidor
+                            SharedPreferences sp = context.getSharedPreferences("token.xml", -1);
+                            String token = sp.getString("token", "");
+                            ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
+                            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), imagenBytes);
+                            MultipartBody.Part imagenParte = MultipartBody.Part.createFormData("imagen", "imagen.jpg", requestBody);
+                            Call<String> cambiarPortadaCall = end.cambiarPortada(token, imagenParte);
+                            cambiarPortadaCall.enqueue(new Callback<String>() {
+                                @Override
+                                public void onResponse(Call<String> call, Response<String> response) {
+                                    if(response.isSuccessful()){
+                                        if(response != null){
+                                            Toast.makeText(context, "Foto cambiada", Toast.LENGTH_SHORT).show();
+                                            portadaMutable.postValue(response.body());
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<String> call, Throwable t) {
+
+                                }
+                            });
+
+                        } catch (IOException e) {
+                            Log.d("salida", e.toString());
+                        }
                     }
                 }
             }
         }
+
     }
 
 

@@ -25,7 +25,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Part;
 
 public class ApiClient {
-    private static final String PATH="http://192.168.0.15:5200/";
+    private static final String PATH="http://192.168.0.10:5200/";
     private static  EndPointGamerAsk EndPointGamerAsk;
 
     public static EndPointGamerAsk getEndPointGamerAsk(){
@@ -58,8 +58,9 @@ public class ApiClient {
         @Multipart
         @PUT("Usuario/cambiar-foto")
         Call<String> cambiarFoto(@Header("Authorization") String token, @Part MultipartBody.Part imagen);
-        //@DELETE("Usuario/eliminar-foto")
-        //Call<Integer> eliminarFoto(@Header("Authorization") String token);
+        @Multipart
+        @PUT("Usuario/cambiar-portada")
+        Call<String> cambiarPortada(@Header("Authorization") String token, @Part MultipartBody.Part imagen);
 
         @GET("Reciente")
         Call<ArrayList<Juego>> obtenerJuegosRecientes(@Header("Authorization") String token);
