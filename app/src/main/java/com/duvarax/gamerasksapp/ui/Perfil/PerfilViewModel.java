@@ -162,8 +162,7 @@ public class PerfilViewModel extends AndroidViewModel {
 
                             @Override
                             public void onFailure(Call<String> call, Throwable t) {
-                                Log.d("salida fail", t.getMessage());
-                                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+
                             }
                         });
                     } catch (IOException e) {

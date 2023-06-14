@@ -38,6 +38,7 @@
     <ImageView
         android:id="@+id/ivImagenPerfil"
         android:layout_width="112dp"
+        android:scaleType="fitXY"
         android:layout_height="108dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/perfil_image_rounded"
