@@ -6,13 +6,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 
 import com.duvarax.gamerasksapp.databinding.ActivityMainBinding;
-import com.duvarax.gamerasksapp.ui.LoginActivityViewModel;
 
 
 public class LoginActivity extends AppCompatActivity {

@@ -1,5 +1,7 @@
 package com.duvarax.gamerasksapp;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -20,7 +22,6 @@ import com.duvarax.gamerasksapp.databinding.ActivityMenuBinding;
 public class MenuActivity extends AppCompatActivity {
 
     private ActivityMenuBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +48,10 @@ public class MenuActivity extends AppCompatActivity {
         int id = item.getItemId();
         Log.d("salida", id+"");
         if(id == R.id.menu1){
-            Toast.makeText(getApplicationContext(), "Boton 1", Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(this,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_editar_perfil);
+        }
+        if(id == R.id.menu2){
+            Navigation.findNavController(this,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_editar_contraseña);
         }
         return super.onOptionsItemSelected(item);
     }

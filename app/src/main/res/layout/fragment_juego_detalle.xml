@@ -9,7 +9,7 @@
     tools:context=".ui.Juegos.JuegoDetalleFragment">
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/ivJuegoDetallePortada"
         android:layout_width="175dp"
         android:layout_height="208dp"
         android:layout_marginStart="36dp"
@@ -29,7 +29,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.18"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintStart_toEndOf="@+id/ivJuegoDetallePortada"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,10 +41,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.423"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4">
+        app:layout_constraintTop_toBottomOf="@+id/ivJuegoDetallePortada">
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/tvJuegoDetalleAutor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -101,7 +101,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/tvJuegoDetalleNombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -117,7 +117,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/tvJuegoDetalleFecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/oswald_regular"
@@ -161,7 +161,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/tvPreguntaXJuego"
+                android:id="@+id/tvJuegoDetalleDescripcion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/oswald_regular"

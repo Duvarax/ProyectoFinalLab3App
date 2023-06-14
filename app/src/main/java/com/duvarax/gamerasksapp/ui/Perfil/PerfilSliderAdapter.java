@@ -53,7 +53,7 @@ public class PerfilSliderAdapter extends RecyclerView.Adapter<PerfilSliderAdapte
             public void onClick(View v) {
                 Bundle juego = new Bundle();
                 juego.putSerializable("juego", listaJuegos.get(position));
-                Navigation.findNavController(activity,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_juegos, juego);
+                Navigation.findNavController(activity,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_detalle_juego, juego);
             }
         });
         if (position == listaJuegos.size() - 2){

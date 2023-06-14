@@ -1,4 +1,4 @@
-package com.duvarax.gamerasksapp.ui;
+package com.duvarax.gamerasksapp;
 
 import android.app.Application;
 import android.content.Context;
@@ -55,7 +55,7 @@ public class LoginActivityViewModel extends AndroidViewModel {
                         loginMutable.postValue(true);
                     }
                 }else{
-                    Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
 

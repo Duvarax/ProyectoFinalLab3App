@@ -2,88 +2,100 @@ package com.duvarax.gamerasksapp.Models;
 
 public class Usuario {
 
-    public int Id;
-    public String Nombre;
-    public String Apellido;
-    public String NombreUsuario;
-    public String Email;
-    public String Clave;
-    public String Imagen;
-    public String Portada;
+    public int id;
+    public String nombre;
+    public String apellido;
+    public String nombreUsuario;
+    public String email;
+    public String clave;
+    public String imagen;
+    public String portada;
 
-    public Usuario(int id, String nombre, String apellido, String nombreUsuario, String email, String clave, String imagen, String portada) {
-        Id = id;
-        Nombre = nombre;
-        Apellido = apellido;
-        NombreUsuario = nombreUsuario;
-        Email = email;
-        Clave = clave;
-        Imagen = imagen;
-        Portada = portada;
+    public Usuario(int id, String nombre, String apellido, String nombreusuario, String email, String clave, String imagen, String portada) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.nombreUsuario = nombreusuario;
+        this.email = email;
+        this.clave = clave;
+        this.imagen = imagen;
+        this.portada = portada;
     }
 
-
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
     public String getApellido() {
-        return Apellido;
+        return apellido;
     }
 
     public void setApellido(String apellido) {
-        Apellido = apellido;
+        this.apellido = apellido;
     }
 
-    public String getNombreUsuario() {
-        return NombreUsuario;
+    public String getNombreusuario() {
+        return nombreUsuario;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        NombreUsuario = nombreUsuario;
+    public void setNombreusuario(String nombreusuario) {
+        this.nombreUsuario = nombreusuario;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public String getClave() {
-        return Clave;
+        return clave;
     }
 
     public void setClave(String clave) {
-        Clave = clave;
+        this.clave = clave;
     }
 
     public String getImagen() {
-        return Imagen;
+        return imagen;
     }
 
     public void setImagen(String imagen) {
-        Imagen = imagen;
+        this.imagen = imagen;
     }
 
     public String getPortada() {
-        return Portada;
+        return portada;
     }
 
     public void setPortada(String portada) {
-        Portada = portada;
+        this.portada = portada;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", nombreusuario='" + nombreUsuario + '\'' +
+                ", email='" + email + '\'' +
+                ", imagen='" + imagen + '\'' +
+                ", portada='" + portada + '\'' +
+                '}';
     }
 }

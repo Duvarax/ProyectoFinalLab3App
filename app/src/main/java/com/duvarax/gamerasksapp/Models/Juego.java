@@ -3,60 +3,60 @@ package com.duvarax.gamerasksapp.Models;
 import java.io.Serializable;
 
 public class Juego implements Serializable {
-    private int Id;
-    private String Nombre;
-    private String Descripcion;
-    private String Portada;
-    private String Autor;
+    private int id;
+    private String nombre;
+    private String descripcion;
+    private String portada;
+    private String autor;
     private String fechaLanzamiento;
 
     public Juego(int id, String nombre, String descripcion, String portada, String autor, String fechaLanzamiento) {
-        Id = id;
-        Nombre = nombre;
-        Descripcion = descripcion;
-        Portada = portada;
-        Autor = autor;
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.portada = portada;
+        this.autor = autor;
         this.fechaLanzamiento = fechaLanzamiento;
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
     public String getDescripcion() {
-        return Descripcion;
+        return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
-        Descripcion = descripcion;
+        this.descripcion = descripcion;
     }
 
     public String getPortada() {
-        return Portada;
+        return portada;
     }
 
     public void setPortada(String portada) {
-        Portada = portada;
+        this.portada = portada;
     }
 
     public String getAutor() {
-        return Autor;
+        return autor;
     }
 
     public void setAutor(String autor) {
-        Autor = autor;
+        this.autor = autor;
     }
 
     public String getFechaLanzamiento() {

@@ -20,7 +20,14 @@
         android:name="com.duvarax.gamerasksapp.ui.Perfil.PerfilFragment"
         android:label="Perfil"
 
-        tools:layout="@layout/fragment_perfil" />
+        tools:layout="@layout/fragment_perfil" >
+        <action
+            android:id="@+id/action_navigation_perfil_to_editarPerfilFragment"
+            app:destination="@id/navigation_editar_perfil" />
+        <action
+            android:id="@+id/action_navigation_perfil_to_cambiarClaveFragment"
+            app:destination="@id/navigation_editar_contraseña" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_preguntas"
@@ -58,5 +65,23 @@
         <action
             android:id="@+id/action_navigation_hacer_pregunta_to_navigation_detalle_juego"
             app:destination="@id/navigation_detalle_juego" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_editar_perfil"
+        android:name="com.duvarax.gamerasksapp.ui.Perfil.EditarPerfilFragment"
+        android:label="Editar Perfil"
+        tools:layout="@layout/fragment_editar_perfil">
+        <action
+            android:id="@+id/action_editarPerfilFragment_to_navigation_perfil"
+            app:destination="@id/navigation_perfil" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_editar_contraseña"
+        android:name="com.duvarax.gamerasksapp.ui.Perfil.CambiarClaveFragment"
+        android:label="Editar Contraseña"
+        tools:layout="@layout/fragment_cambiar_clave">
+        <action
+            android:id="@+id/action_cambiarClaveFragment_to_navigation_perfil"
+            app:destination="@id/navigation_perfil" />
     </fragment>
 </navigation>

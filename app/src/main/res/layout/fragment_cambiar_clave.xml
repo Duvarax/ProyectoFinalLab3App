@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Preguntas.CambiarClaveFragment"
+    tools:context=".ui.Perfil.CambiarClaveFragment"
     android:background="@color/blueMain">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -72,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout10">
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/tvJuegoDetalleAutor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -97,7 +97,7 @@
             android:textColorHint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView15"
+            app:layout_constraintStart_toEndOf="@+id/tvJuegoDetalleAutor"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
