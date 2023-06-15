@@ -100,25 +100,7 @@ public class HacerPreguntaViewModel extends AndroidViewModel {
                         ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
                         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), imagenBytes);
                         MultipartBody.Part imagenParte = MultipartBody.Part.createFormData("imagen", "imagen.jpg", requestBody);
-                        Call<String> cambiarFotoCall = end.cambiarFoto(token, imagenParte);
-                        cambiarFotoCall.enqueue(new Callback<String>() {
-                            @Override
-                            public void onResponse(Call<String> call, Response<String> response) {
-                                if (response.isSuccessful()) {
-                                    if (response.body() != null) {
-                                        Toast.makeText(context, "Foto cambiada", Toast.LENGTH_SHORT).show();
-                                    }
-                                } else {
-                                    Log.d("salida", response.toString());
-                                    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
 
-                            @Override
-                            public void onFailure(Call<String> call, Throwable t) {
-
-                            }
-                        });
                     } catch (IOException e) {
                         Log.d("salida", e.toString());
                     }

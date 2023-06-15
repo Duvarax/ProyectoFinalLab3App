@@ -3,6 +3,7 @@ package com.duvarax.gamerasksapp.Request;
 import com.duvarax.gamerasksapp.Models.EditContraseña;
 import com.duvarax.gamerasksapp.Models.Juego;
 import com.duvarax.gamerasksapp.Models.Pregunta;
+import com.duvarax.gamerasksapp.Models.String64;
 import com.duvarax.gamerasksapp.Models.Usuario;
 import com.duvarax.gamerasksapp.Models.UsuarioLogin;
 import com.google.gson.Gson;
@@ -56,9 +57,8 @@ public class ApiClient {
         @PUT("Usuario/editar-contraseña")
         Call<Integer> editarContraseña(@Header("Authorization") String token, @Body EditContraseña edit);
 
-        @Multipart
         @PUT("Usuario/cambiar-foto")
-        Call<String> cambiarFoto(@Header("Authorization") String token, @Part MultipartBody.Part imagen);
+        Call<String> cambiarFoto(@Header("Authorization") String token, @Body String imagen);
         @Multipart
         @PUT("Usuario/cambiar-portada")
         Call<String> cambiarPortada(@Header("Authorization") String token, @Part MultipartBody.Part imagen);

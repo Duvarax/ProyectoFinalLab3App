@@ -8,11 +8,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,15 +89,19 @@ public class PerfilFragment extends Fragment {
                 binding.tvEmailPerfil.setText(usuario.getEmail());
                 binding.tvNombreUsuarioPerfil.setText(usuario.getNombreusuario());
                 Glide.with(getActivity()).load(usuario.getImagen()).into(binding.ivImagenPerfil);
-                Glide.with(getActivity()).load(usuario.getPortada()).into(binding.ivPortadaPerfil);
+                byte[] byteArray = Base64.decode(usuario.getImagen(), Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                binding.ivImagenPerfil.setImageBitmap(bitmap);
             }
         });
 
         mv.getFotoMutable().observe(getActivity(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-
-                Glide.with(getActivity()).load(s).into(binding.ivImagenPerfil);
+                String pureBase64Encoded = s.substring(s.indexOf(",") + 1);
+                byte[] byteArray = Base64.decode(pureBase64Encoded, Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                binding.ivImagenPerfil.setImageBitmap(bitmap);
             }
         });
 
@@ -153,25 +159,14 @@ public class PerfilFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            if (data != null) {
-                Uri imagenUri = data.getData();
-                if (imagenUri != null) {
 
-                    try {
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-                        ImageView iv = getActivity().findViewById(objetivoCamara);
-                        iv.setImageBitmap(bitmap);
                         mv.setFoto(requestCode, resultCode, data, REQUEST_IMAGE_CAPTURE, objetivoCamara);
                         objetivoCamara = 0;
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+
                 }
             }
-        }
-    }
+
+
 
 
         private boolean validaPermisos() {
