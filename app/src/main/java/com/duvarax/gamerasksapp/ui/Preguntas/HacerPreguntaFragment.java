@@ -88,7 +88,6 @@ public class HacerPreguntaFragment extends Fragment {
             @Override
             public void onChanged(String s) {
                 Glide.with(getContext()).load(s).into(binding.ivCapturaView);
-                binding.btnEnviarPregunta.setEnabled(true);
                 binding.btnEnviarPregunta.setBackgroundColor(R.color.white);
             }
         });
