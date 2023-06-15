@@ -57,10 +57,10 @@ public class ApiClient {
 
         @Multipart
         @PUT("Usuario/cambiar-foto")
-        Call<String> cambiarFoto(@Header("Authorization") String token, @Part MultipartBody.Part imagen);
+        Call<Imagen> cambiarFoto(@Header("Authorization") String token, @Part MultipartBody.Part imagen);
         @Multipart
         @PUT("Usuario/cambiar-portada")
-        Call<String> cambiarPortada(@Header("Authorization") String token, @Part MultipartBody.Part imagen);
+        Call<Imagen> cambiarPortada(@Header("Authorization") String token, @Part MultipartBody.Part imagen);
 
         @GET("Reciente")
         Call<ArrayList<Juego>> obtenerJuegosRecientes(@Header("Authorization") String token);
@@ -70,7 +70,7 @@ public class ApiClient {
         Call<ArrayList<Pregunta>> obtenerPreguntasDeUsuarioLogeado(@Header("Authorization") String token);
 
         @POST("Pregunta/guardar")
-        Call<Integer> altaPregunta(@Header("Authorization") String token,@Body Pregunta pregunta);
+        Call<Pregunta> altaPregunta(@Header("Authorization") String token,@Body Pregunta pregunta);
 
         @POST("Pregunta/cantidad")
         Call<Integer> obtenerCantidadPreguntasXJuego(@Header("Authorization") String token,@Body Juego juego);

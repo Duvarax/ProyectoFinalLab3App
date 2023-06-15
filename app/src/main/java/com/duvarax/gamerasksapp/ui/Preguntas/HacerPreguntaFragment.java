@@ -113,26 +113,9 @@ public class HacerPreguntaFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-
-        if (data != null) {
-            Uri imagenUri = data.getData();
-            if (imagenUri != null) {
-
-                try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-                    ImageView iv = getActivity().findViewById(R.id.ivCapturaView);
-                    iv.setImageBitmap(bitmap);
-                    mv.setCaptura(requestCode, resultCode, data,REQUEST_IMAGE_CAPTURE);
-                } catch (FileNotFoundException e) {
-                    throw new RuntimeException(e);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                mv.setCaptura(requestCode, resultCode, data,REQUEST_IMAGE_CAPTURE);
             }
-        }
 
-    }
     private boolean validaPermisos() {
 
         if(Build.VERSION.SDK_INT<Build.VERSION_CODES.M){

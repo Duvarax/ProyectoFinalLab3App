@@ -7,6 +7,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.duvarax.gamerasksapp.Models.Imagen;
 import com.duvarax.gamerasksapp.Models.Juego;
 import com.duvarax.gamerasksapp.Models.Usuario;
 import com.duvarax.gamerasksapp.R;
@@ -148,39 +150,35 @@ public class PerfilViewModel extends AndroidViewModel {
                 Uri imagenUri = data.getData();
                 if (imagenUri != null) {
                     if (objetivo == R.id.ivImagenPerfil) {
-                        try {
 
-                            InputStream inputStream = context.getContentResolver().openInputStream(imagenUri);
-                            byte[] imagenBytes = getBytesFromInputStream(inputStream);
-                            // Enviar la imagen al servidor
-                            SharedPreferences sp = context.getSharedPreferences("token.xml", -1);
-                            String token = sp.getString("token", "");
-                            ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
-                            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), imagenBytes);
-                            MultipartBody.Part imagenParte = MultipartBody.Part.createFormData("imagen", "imagen_" + usuarioMutable.getValue().id + ".jpg", requestBody);
-                            Call<String> cambiarFotoCall = end.cambiarFoto(token, imagenParte);
-                            cambiarFotoCall.enqueue(new Callback<String>() {
-                                @Override
-                                public void onResponse(Call<String> call, Response<String> response) {
-                                    if (response.isSuccessful()) {
-                                        if (response.body() != null) {
-                                            Toast.makeText(context, "Foto cambiada", Toast.LENGTH_SHORT).show();
-                                            fotoMutable.postValue(response.body());
-                                        }
-                                    } else {
-                                        Log.d("salida", response.toString());
-                                        Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                        // Enviar la imagen al servidor
+                        SharedPreferences sp = context.getSharedPreferences("token.xml", -1);
+                        String token = sp.getString("token", "");
+                        ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
+                        String realPath = getRealPathFromURI(imagenUri);
+                        File imgFile = new File(realPath);
+                        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"),imgFile);
+                        MultipartBody.Part imagen = MultipartBody.Part.createFormData("imagen", imgFile.getName(), requestBody);
+                        Call<Imagen> cambiarFotoCall = end.cambiarFoto(token, imagen);
+                        cambiarFotoCall.enqueue(new Callback<Imagen>() {
+                            @Override
+                            public void onResponse(Call<Imagen> call, Response<Imagen> response) {
+                                if (response.isSuccessful()) {
+                                    if (response.body() != null) {
+                                        Toast.makeText(context, "Foto cambiada", Toast.LENGTH_SHORT).show();
+                                        fotoMutable.postValue(response.body().getUrl());
                                     }
+                                } else {
+                                    Log.d("salida", response.toString());
+                                    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                                 }
+                            }
 
-                                @Override
-                                public void onFailure(Call<String> call, Throwable t) {
+                            @Override
+                            public void onFailure(Call<Imagen> call, Throwable t) {
 
-                                }
-                            });
-                        } catch (IOException e) {
-                            Log.d("salida", e.toString());
-                        }
+                            }
+                        });
                     } else {
                         try {
                             InputStream inputStream = context.getContentResolver().openInputStream(imagenUri);
@@ -189,22 +187,24 @@ public class PerfilViewModel extends AndroidViewModel {
                             SharedPreferences sp = context.getSharedPreferences("token.xml", -1);
                             String token = sp.getString("token", "");
                             ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
-                            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), imagenBytes);
-                            MultipartBody.Part imagenParte = MultipartBody.Part.createFormData("imagen", "imagen.jpg", requestBody);
-                            Call<String> cambiarPortadaCall = end.cambiarPortada(token, imagenParte);
-                            cambiarPortadaCall.enqueue(new Callback<String>() {
+                            String realPath = getRealPathFromURI(imagenUri);
+                            File imgFile = new File(realPath);
+                            RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"),imgFile);
+                            MultipartBody.Part imagen = MultipartBody.Part.createFormData("imagen", imgFile.getName(), requestBody);
+                            Call<Imagen> cambiarPortadaCall = end.cambiarPortada(token, imagen);
+                            cambiarPortadaCall.enqueue(new Callback<Imagen>() {
                                 @Override
-                                public void onResponse(Call<String> call, Response<String> response) {
+                                public void onResponse(Call<Imagen> call, Response<Imagen> response) {
                                     if (response.isSuccessful()) {
                                         if (response != null) {
                                             Toast.makeText(context, "Foto cambiada", Toast.LENGTH_SHORT).show();
-                                            portadaMutable.postValue(response.body());
+                                            portadaMutable.postValue(response.body().getUrl());
                                         }
                                     }
                                 }
 
                                 @Override
-                                public void onFailure(Call<String> call, Throwable t) {
+                                public void onFailure(Call<Imagen> call, Throwable t) {
 
                                 }
                             });
@@ -220,7 +220,20 @@ public class PerfilViewModel extends AndroidViewModel {
 
 
 
+    private String getRealPathFromURI(Uri uri) {
+        String filePath = "";
+        String[] projection = {MediaStore.Images.Media.DATA};
 
+        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
+        if (cursor != null) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            if (cursor.moveToFirst()) {
+                filePath = cursor.getString(column_index);
+            }
+            cursor.close();
+        }
+        return filePath;
+    }
 
 
 

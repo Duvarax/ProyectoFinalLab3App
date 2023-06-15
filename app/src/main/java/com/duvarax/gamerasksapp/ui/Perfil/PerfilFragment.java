@@ -52,6 +52,7 @@ public class PerfilFragment extends Fragment {
     private Runnable sliderCambio;
     public int objetivoCamara;
     private static int REQUEST_IMAGE_CAPTURE=1;
+    public static Usuario usuarioLogeado;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -69,12 +70,12 @@ public class PerfilFragment extends Fragment {
         mv.getUsuarioLogeado().observe(getActivity(), new Observer<Usuario>() {
             @Override
             public void onChanged(Usuario usuario) {
+
                 binding.tvNombrePerfil.setText(usuario.getNombre() + " " + usuario.getApellido());
                 binding.tvEmailPerfil.setText(usuario.getEmail());
                 binding.tvNombreUsuarioPerfil.setText(usuario.getNombreusuario());
                 Glide.with(getActivity()).load(usuario.getImagen()).into(binding.ivImagenPerfil);
-                Glide.with(getActivity()).load(usuario.getPortada()).into(binding.ivPortadaPerfil);
-            }
+                Glide.with(getActivity()).load(usuario.getPortada()).into(binding.ivPortadaPerfil);}
         });
 
 
@@ -106,7 +107,18 @@ public class PerfilFragment extends Fragment {
             }
         });
 
-
+        mv.getFotoMutable().observe(getActivity(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Glide.with(getContext()).load(s).into(binding.ivImagenPerfil);
+            }
+        });
+        mv.getPortadaMutable().observe(getActivity(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Glide.with(getContext()).load(s).into(binding.ivPortadaPerfil);
+            }
+        });
 
         binding.btnCambiarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,26 +157,13 @@ public class PerfilFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            if (data != null) {
-                Uri imagenUri = data.getData();
-                if (imagenUri != null) {
 
-                    try {
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-                        ImageView iv = getActivity().findViewById(objetivoCamara);
-                        iv.setImageBitmap(bitmap);
-                        mv.setFoto(requestCode, resultCode, data, REQUEST_IMAGE_CAPTURE, objetivoCamara);
-                        objetivoCamara = 0;
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
+            mv.setFoto(requestCode, resultCode, data, REQUEST_IMAGE_CAPTURE, objetivoCamara);
+            objetivoCamara = 0;
+
         }
-    }
+
+
 
 
     private boolean validaPermisos() {

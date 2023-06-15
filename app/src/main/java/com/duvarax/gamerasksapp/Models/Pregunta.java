@@ -9,14 +9,24 @@ public class Pregunta implements Serializable {
     private Usuario usuario;
     private Juego juego;
     private String captura;
+    private String capturaPublicId;
 
-    public Pregunta(int id, String texto, String fechaCreacion, Usuario usuario, Juego juego, String captura) {
+    public Pregunta(int id, String texto, String fechaCreacion, Usuario usuario, Juego juego, String captura, String capturaPublicId) {
         this.id = id;
         this.texto = texto;
         this.fechaCreacion = fechaCreacion;
         this.usuario = usuario;
         this.juego = juego;
         this.captura = captura;
+        this.capturaPublicId = capturaPublicId;
+    }
+
+    public String getCapturaPublicId() {
+        return capturaPublicId;
+    }
+
+    public void setCapturaPublicId(String capturaPublicId) {
+        this.capturaPublicId = capturaPublicId;
     }
 
     public int getId() {

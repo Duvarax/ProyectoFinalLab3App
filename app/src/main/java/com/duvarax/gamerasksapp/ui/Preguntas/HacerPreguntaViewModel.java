@@ -20,6 +20,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.duvarax.gamerasksapp.Models.Imagen;
 import com.duvarax.gamerasksapp.Models.Juego;
 import com.duvarax.gamerasksapp.Models.Pregunta;
+import com.duvarax.gamerasksapp.Models.Usuario;
 import com.duvarax.gamerasksapp.Request.ApiClient;
 
 import java.io.ByteArrayOutputStream;
@@ -40,6 +41,7 @@ public class HacerPreguntaViewModel extends AndroidViewModel {
     private MutableLiveData<Juego> juegoMutable;
     private MutableLiveData<Integer> envioSatisfactorioMutable;
     private MutableLiveData<String> capturaMutable;
+    public String urlCaptura;
     public HacerPreguntaViewModel(@NonNull Application application) {
         super(application);
         context = application.getApplicationContext();
@@ -73,30 +75,23 @@ public class HacerPreguntaViewModel extends AndroidViewModel {
         String token = sp.getString("token", "");
         ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
         Pregunta pregunta;
-        if(capturaMutable.getValue() == null || capturaMutable.getValue() == " "){
-            pregunta = new Pregunta(0, texto, "", null, juegoMutable.getValue(), "https://res.cloudinary.com/dhg4fafod/image/upload/v1686864008/gamerask_/xnauaq8gcbwjnx4dn6av.jpg");
-        }else{
-            pregunta = new Pregunta(0, texto, "", null, juegoMutable.getValue(), capturaMutable.getValue());
-        }
-        Call<Integer> callAltaPregunta = end.altaPregunta(token, pregunta);
-        callAltaPregunta.enqueue(new Callback<Integer>() {
+        pregunta = new Pregunta(0, texto, null,  new Usuario(0, "","","","","","",""), juegoMutable.getValue(), urlCaptura, null);
+        Call<Pregunta> callAltaPregunta = end.altaPregunta(token, pregunta);
+        callAltaPregunta.enqueue(new Callback<Pregunta>() {
             @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
+            public void onResponse(Call<Pregunta> call, Response<Pregunta> response) {
                 if(response.isSuccessful()){
                     if(response.body() != null){
-                        if(response.body() == 1){
-                            Toast.makeText(context, "Pregunta creada", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                        Log.d("salida", response.body().getTexto());
+                        Toast.makeText(context, "Pregunta creada", Toast.LENGTH_SHORT).show();
                         }
                     }else{
                         Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
-            }
 
             @Override
-            public void onFailure(Call<Integer> call, Throwable t) {
+            public void onFailure(Call<Pregunta> call, Throwable t) {
                 Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -107,41 +102,36 @@ public class HacerPreguntaViewModel extends AndroidViewModel {
             if (data != null) {
                 Uri imagenUri = data.getData();
                 if (imagenUri != null) {
-                    try {
-                        InputStream inputStream = context.getContentResolver().openInputStream(imagenUri);
-                        byte[] imagenBytes = getBytesFromInputStream(inputStream);
-                        // Enviar la imagen al servidor
-                        SharedPreferences sp = context.getSharedPreferences("token.xml", -1);
-                        String token = sp.getString("token", "");
-                        ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
-                        String realPath = getRealPathFromURI(imagenUri);
-                        File imgFile = new File(realPath);
-                        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"),imgFile);
-                        MultipartBody.Part captura = MultipartBody.Part.createFormData("captura", imgFile.getName(), requestBody);
-                        Call<Imagen> callCaptura = end.getCaptura(token, captura);
-                        callCaptura.enqueue(new Callback<Imagen>() {
-                            @Override
-                            public void onResponse(Call<Imagen> call, Response<Imagen> response) {
-                                if (response.isSuccessful()){
-                                    if(response.body() != null){
-                                        Toast.makeText(context, "Imagen guardada", Toast.LENGTH_SHORT).show();
-                                        capturaMutable.postValue(response.body().getUrl());
-                                    }
-                                }else{
-                                    Log.d("salida", response.toString());
-                                    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                    // Enviar la imagen al servidor
+                    SharedPreferences sp = context.getSharedPreferences("token.xml", -1);
+                    String token = sp.getString("token", "");
+                    ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
+                    String realPath = getRealPathFromURI(imagenUri);
+                    File imgFile = new File(realPath);
+                    RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"),imgFile);
+                    MultipartBody.Part captura = MultipartBody.Part.createFormData("captura", imgFile.getName(), requestBody);
+                    Call<Imagen> callCaptura = end.getCaptura(token, captura);
+                    callCaptura.enqueue(new Callback<Imagen>() {
+                        @Override
+                        public void onResponse(Call<Imagen> call, Response<Imagen> response) {
+                            if (response.isSuccessful()){
+                                if(response.body() != null){
+                                    Toast.makeText(context, "Imagen guardada", Toast.LENGTH_SHORT).show();
+                                    urlCaptura = response.body().getUrl();
+                                    capturaMutable.postValue(response.body().getUrl());
                                 }
+                            }else{
+                                Log.d("salida", response.toString());
+                                Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                             }
+                        }
 
-                            @Override
-                            public void onFailure(Call<Imagen> call, Throwable t) {
-                                Log.d("salida", t.getMessage());
-                                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    } catch (IOException e) {
-                        Log.d("salida", e.toString());
-                    }
+                        @Override
+                        public void onFailure(Call<Imagen> call, Throwable t) {
+                            Log.d("salida", t.getMessage());
+                            Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         }

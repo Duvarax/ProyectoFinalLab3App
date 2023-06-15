@@ -2,12 +2,12 @@ package com.duvarax.gamerasksapp.Models;
 
 public class Imagen {
     public int id;
-    public String url;
+    public String urlImagen;
     public String publicId;
 
     public Imagen(int id, String url, String publicId) {
         this.id = id;
-        this.url = url;
+        this.urlImagen = url;
         this.publicId = publicId;
     }
 
@@ -20,11 +20,11 @@ public class Imagen {
     }
 
     public String getUrl() {
-        return url;
+        return urlImagen;
     }
 
     public void setUrl(String url) {
-        this.url = url;
+        this.urlImagen = url;
     }
 
     public String getPublicId() {
