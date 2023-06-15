@@ -1,5 +1,6 @@
 package com.duvarax.gamerasksapp.Request;
 
+import com.duvarax.gamerasksapp.Models.Imagen;
 import com.duvarax.gamerasksapp.Models.EditContraseña;
 import com.duvarax.gamerasksapp.Models.Juego;
 import com.duvarax.gamerasksapp.Models.JuegoBuscar;
@@ -10,15 +11,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
@@ -78,7 +76,9 @@ public class ApiClient {
         Call<Integer> obtenerCantidadPreguntasXJuego(@Header("Authorization") String token,@Body Juego juego);
         @Multipart
         @POST("Pregunta/captura")
-        Call<String> getCaptura(@Header("Authorization") String token, @Part MultipartBody.Part captura);
+        Call<Imagen> getCaptura(@Header("Authorization") String token, @Part MultipartBody.Part captura);
+        @POST("Pregunta/juego")
+        Call<ArrayList<Pregunta>> obtenerPreguntasXJuego(@Header("Authorization") String token, @Body Juego juego);
 
 
         @POST("Juego")

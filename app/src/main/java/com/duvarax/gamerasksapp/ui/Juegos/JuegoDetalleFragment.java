@@ -39,18 +39,8 @@ public class JuegoDetalleFragment extends Fragment {
         Juego juego =(Juego) data.getSerializable("juego");
 
 
-        binding.btnPreguntas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(getActivity(),R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_preguntas_x_juego);
-            }
-        });
-        binding.btnPreguntar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(getActivity(),R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_hacer_pregunta, data);
-            }
-        });
+
+
 
         mv.getJuego().observe(getActivity(), new Observer<Juego>() {
             @Override
@@ -70,6 +60,20 @@ public class JuegoDetalleFragment extends Fragment {
             public void onChanged(Integer integer) {
                 String aux = "Cantidad de preguntas:";
                 binding.tvCantidadPreguntas.setText(aux + " " + integer);
+            }
+        });
+
+
+        binding.btnPreguntas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_preguntas_x_juego, data);
+            }
+        });
+        binding.btnPreguntar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_hacer_pregunta, data);
             }
         });
 

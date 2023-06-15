@@ -82,11 +82,17 @@ public class HacerPreguntaFragment extends Fragment {
                 Navigation.findNavController(getActivity(),R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_preguntas_x_juego, data);
             }
         });
+        mv.getCapturaMutable().observe(getActivity(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Glide.with(getContext()).load(s).into(binding.ivCapturaView);
+            }
+        });
 
         binding.btnEnviarPregunta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mv.enviarPregunta(binding.etPregunta.getText().toString(), "");
+                mv.enviarPregunta(binding.etPregunta.getText().toString());
             }
         });
 

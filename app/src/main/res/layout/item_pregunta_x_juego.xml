@@ -42,24 +42,25 @@
 
         <ImageView
             android:id="@+id/ivCapturaXPreguntaXJuego"
-            android:layout_width="29dp"
-            android:layout_height="29dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="49dp"
+            android:layout_height="38dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.958"
+            app:layout_constraintHorizontal_bias="0.914"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.955"
             app:srcCompat="@drawable/camara_icon" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout6"
             android:layout_width="263dp"
             android:layout_height="80dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/rounded_border_solid"
-            app:layout_constraintBottom_toTopOf="@+id/ivCapturaXPreguntaXJuego"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.484">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/tvPreguntaXJuego"

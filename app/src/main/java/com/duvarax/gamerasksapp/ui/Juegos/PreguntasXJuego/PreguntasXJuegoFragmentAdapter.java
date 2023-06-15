@@ -2,6 +2,7 @@ package com.duvarax.gamerasksapp.ui.Juegos.PreguntasXJuego;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -48,17 +50,19 @@ public class PreguntasXJuegoFragmentAdapter extends RecyclerView.Adapter<Pregunt
 
         holder.pregunta.setText(listaPreguntas.get(position).getTexto());
         if(listaPreguntas.get(position).getCaptura() == null || listaPreguntas.get(position).getCaptura() == ""){
-            holder.captura.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, "A", Toast.LENGTH_SHORT).show();
-                    //iniciar camara o galeria
-                }
-            });
+            holder.captura.setImageResource(R.drawable.not_icon);
         }else{
             Glide.with(context)
                     .load(listaPreguntas.get(position).getCaptura())
                     .into(holder.captura);
+            holder.captura.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("captura", listaPreguntas.get(position).getCaptura());
+                    Navigation.findNavController(activity,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_captura_ver, bundle);
+                }
+            });
         }
         holder.btRespuestas.setOnClickListener(new View.OnClickListener() {
             @Override

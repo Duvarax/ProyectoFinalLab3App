@@ -33,7 +33,11 @@
         android:id="@+id/navigation_preguntas"
         android:name="com.duvarax.gamerasksapp.ui.Preguntas.PreguntasFragment"
         android:label="Listado de preguntas"
-        tools:layout="@layout/fragment_preguntas" />
+        tools:layout="@layout/fragment_preguntas" >
+        <action
+            android:id="@+id/action_navigation_preguntas_to_capturaFragment"
+            app:destination="@id/navigation_captura_ver" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_detalle_juego"
         android:name="com.duvarax.gamerasksapp.ui.Juegos.JuegoDetalleFragment"
@@ -56,6 +60,9 @@
         <action
             android:id="@+id/action_preguntasXJuegoFragment_to_navigation_detalle_juego"
             app:destination="@id/navigation_detalle_juego" />
+        <action
+            android:id="@+id/action_navigation_preguntas_x_juego_to_capturaFragment"
+            app:destination="@id/navigation_captura_ver" />
     </fragment>
     <fragment
         android:id="@+id/navigation_hacer_pregunta"
@@ -83,5 +90,17 @@
         <action
             android:id="@+id/action_cambiarClaveFragment_to_navigation_perfil"
             app:destination="@id/navigation_perfil" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_captura_ver"
+        android:name="com.duvarax.gamerasksapp.ui.Preguntas.CapturaFragment"
+        android:label="Captura"
+        tools:layout="@layout/fragment_captura">
+        <action
+            android:id="@+id/action_capturaFragment_to_navigation_preguntas_x_juego"
+            app:destination="@id/navigation_preguntas_x_juego" />
+        <action
+            android:id="@+id/action_capturaFragment_to_navigation_preguntas"
+            app:destination="@id/navigation_preguntas" />
     </fragment>
 </navigation>

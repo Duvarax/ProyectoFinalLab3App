@@ -1,5 +1,6 @@
 package com.duvarax.gamerasksapp.ui.Juegos.PreguntasXJuego;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 
 public class PreguntasXJuegoFragment extends Fragment {
 
-    private PreguntasXJuegoViewModel mViewModel;
+    private PreguntasXJuegoViewModel mv;
     private FragmentPreguntasXJuegoBinding binding;
     private Context context;
 
@@ -39,17 +40,37 @@ public class PreguntasXJuegoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentPreguntasXJuegoBinding.inflate(inflater, container, false);
+        mv = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PreguntasXJuegoViewModel.class);
         View root = binding.getRoot();
+        Bundle data = getArguments();
+        Juego juego =(Juego) data.getSerializable("juego");
 
-        Glide.with(getContext())
-                .load("https://generacionxbox.com/wp-content/uploads/2021/04/epic-games-store-juegos-gratis.jpg")
-                .into(binding.ivPortadaJuegoPregunta);
-        ArrayList<Pregunta> listaPreguntas = new ArrayList<Pregunta>();
-        listaPreguntas.add(new Pregunta(1,"Pregunta", "10/06/2023", new Usuario(1, "claudio", "","","","","https://cdn-icons-png.flaticon.com/512/149/149071.png",""), new Juego(1, "","","https://generacionxbox.com/wp-content/uploads/2021/04/epic-games-store-juegos-gratis.jpg", "", ""), ""));
-        PreguntasXJuegoFragmentAdapter adapter = new PreguntasXJuegoFragmentAdapter(getContext(), inflater, listaPreguntas, getActivity());
-        binding.rvListaPreguntasXJuego.setAdapter(adapter);
-        GridLayoutManager grid = new GridLayoutManager(root.getContext(), 1, GridLayoutManager.VERTICAL, false);
-        binding.rvListaPreguntasXJuego.setLayoutManager(grid);
+        mv.getJuegoMutable().observe(getActivity(), new Observer<Juego>() {
+            @Override
+            public void onChanged(Juego juego) {
+                binding.tvNombrePreguntaXJuego.setText(juego.getNombre());
+                Glide.with(getActivity()).load(juego.getPortada()).into(binding.ivPortadaJuegoPregunta);
+            }
+        });
+        mv.getCantidadPreguntas().observe(getActivity(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                binding.tvCantidadPreguntasPreguntaXJuego.setText(integer.toString());
+            }
+        });
+        mv.getListaPreguntas().observe(getActivity(), new Observer<ArrayList<Pregunta>>() {
+            @Override
+            public void onChanged(ArrayList<Pregunta> preguntas) {
+                PreguntasXJuegoFragmentAdapter adapter = new PreguntasXJuegoFragmentAdapter(getContext(), inflater, preguntas, getActivity());
+                binding.rvListaPreguntasXJuego.setAdapter(adapter);
+                GridLayoutManager grid = new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false);
+                binding.rvListaPreguntasXJuego.setLayoutManager(grid);
+            }
+        });
+
+        mv.setJuego(juego);
+        mv.obtenerCantidadPreguntas(juego);
+        mv.obtenerPreguntasXJuego(juego);
         return root;
 
 
@@ -67,7 +88,6 @@ public class PreguntasXJuegoFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(PreguntasXJuegoViewModel.class);
         // TODO: Use the ViewModel
     }
 
