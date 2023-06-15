@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 public class PreguntasFragment extends Fragment {
 
     private FragmentPreguntasBinding binding;
+    private PreguntasViewModel mv;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -29,13 +31,20 @@ public class PreguntasFragment extends Fragment {
 
         binding = FragmentPreguntasBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        ArrayList<Pregunta> listaPreguntas = new ArrayList<Pregunta>();
-        listaPreguntas.add(new Pregunta(1,"Pregunta", "10/06/2023", new Usuario(1, "claudio", "","","","","",""), new Juego(1, "","","https://generacionxbox.com/wp-content/uploads/2021/04/epic-games-store-juegos-gratis.jpg", "", ""), ""));
-        PreguntasFragmentAdapter adapter = new PreguntasFragmentAdapter(root.getContext(), getLayoutInflater(),listaPreguntas, getActivity());
-        binding.rvListaPreguntas.setAdapter(adapter);
-        GridLayoutManager grid = new GridLayoutManager(root.getContext(), 1, GridLayoutManager.VERTICAL, false);
-        binding.rvListaPreguntas.setLayoutManager(grid);
+        mv = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PreguntasViewModel.class);
 
+
+        mv.getListaPreguntas().observe(getActivity(), new Observer<ArrayList<Pregunta>>() {
+            @Override
+            public void onChanged(ArrayList<Pregunta> preguntas) {
+                PreguntasFragmentAdapter adapter = new PreguntasFragmentAdapter(getContext(), getLayoutInflater(),preguntas, getActivity());
+                binding.rvListaPreguntas.setAdapter(adapter);
+                GridLayoutManager grid = new GridLayoutManager(root.getContext(), 1, GridLayoutManager.VERTICAL, false);
+                binding.rvListaPreguntas.setLayoutManager(grid);
+            }
+        });
+
+        mv.obtenerPreguntas();
 
         return root;
     }

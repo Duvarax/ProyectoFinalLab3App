@@ -2,6 +2,7 @@ package com.duvarax.gamerasksapp.Request;
 
 import com.duvarax.gamerasksapp.Models.EditContraseña;
 import com.duvarax.gamerasksapp.Models.Juego;
+import com.duvarax.gamerasksapp.Models.Pregunta;
 import com.duvarax.gamerasksapp.Models.Usuario;
 import com.duvarax.gamerasksapp.Models.UsuarioLogin;
 import com.google.gson.Gson;
@@ -65,8 +66,18 @@ public class ApiClient {
         @GET("Reciente")
         Call<ArrayList<Juego>> obtenerJuegosRecientes(@Header("Authorization") String token);
 
+
+        @GET("Pregunta")
+        Call<ArrayList<Pregunta>> obtenerPreguntasDeUsuarioLogeado(@Header("Authorization") String token);
+
+        @POST("Pregunta/guardar")
+        Call<Integer> altaPregunta(@Header("Authorization") String token,@Body Pregunta pregunta);
+
         @POST("Pregunta/cantidad")
         Call<Integer> obtenerCantidadPreguntasXJuego(@Header("Authorization") String token,@Body Juego juego);
+
+        @GET("Juego/obtener")
+        Call<ArrayList<Juego>> obtenerJuegos(@Header("Authorization") String token);
 
 
     }

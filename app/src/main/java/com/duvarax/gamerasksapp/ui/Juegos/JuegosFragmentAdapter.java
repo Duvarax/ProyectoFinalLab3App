@@ -2,6 +2,7 @@ package com.duvarax.gamerasksapp.ui.Juegos;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,9 @@ public class JuegosFragmentAdapter extends RecyclerView.Adapter<JuegosFragmentAd
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "Enviar al juego", Toast.LENGTH_SHORT).show();
-                Navigation.findNavController(activity,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_detalle_juego);
+                Bundle juego = new Bundle();
+                juego.putSerializable("juego", listaJuegos.get(position));
+                Navigation.findNavController(activity,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_detalle_juego, juego);
             }
         });
     }

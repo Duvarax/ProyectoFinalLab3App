@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -24,28 +25,36 @@ import java.util.ArrayList;
 public class JuegosFragment extends Fragment {
 
     private FragmentJuegosBinding binding;
+    private JuegosViewModel mv;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentJuegosBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        mv = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(JuegosViewModel.class);
 
         binding.ivBuscar.setImageResource(R.drawable.lupa_icon);
         binding.ivBuscar.setColorFilter(ContextCompat.getColor(getActivity(), R.color.black));
+
+        mv.getListaJuegos().observe(getActivity(), new Observer<ArrayList<Juego>>() {
+            @Override
+            public void onChanged(ArrayList<Juego> juegos) {
+                GridLayoutManager grid = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
+                binding.rvListaJuegos.setLayoutManager(grid);
+                JuegosFragmentAdapter adapter = new JuegosFragmentAdapter(getContext(), getLayoutInflater(),juegos, getActivity());
+                binding.rvListaJuegos.setAdapter(adapter);
+            }
+        });
+
+        mv.obtenerListaJuegos();
+
         binding.ivBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), binding.etBuscarJuego.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
-        ArrayList<Juego> listaJuegos = new ArrayList<Juego>();
-        listaJuegos.add(new Juego(1, "dbz", "x", "https://generacionxbox.com/wp-content/uploads/2021/04/epic-games-store-juegos-gratis.jpg", "duvara", "10-06-2023"));
-        listaJuegos.add(new Juego(2, "dbz", "x", "https://generacionxbox.com/wp-content/uploads/2021/04/epic-games-store-juegos-gratis.jpg", "duvara", "10-06-2023"));
-        GridLayoutManager grid = new GridLayoutManager(root.getContext(), 2, GridLayoutManager.VERTICAL, false);
-        binding.rvListaJuegos.setLayoutManager(grid);
-        JuegosFragmentAdapter adapter = new JuegosFragmentAdapter(root.getContext(), getLayoutInflater(),listaJuegos, getActivity());
-        binding.rvListaJuegos.setAdapter(adapter);
         return root;
     }
 

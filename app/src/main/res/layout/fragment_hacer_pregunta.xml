@@ -57,7 +57,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvIdUsuario"
+            android:id="@+id/tvIdJuegoPreguntar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -83,7 +83,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textviewr" />
 
         <TextView
-            android:id="@+id/tvNickName"
+            android:id="@+id/tvNombreJuegoPreguntar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -93,7 +93,7 @@
             android:textColor="@color/black"
             android:textSize="14dp"
             app:layout_constraintStart_toEndOf="@+id/textview2"
-            app:layout_constraintTop_toBottomOf="@+id/tvIdUsuario" />
+            app:layout_constraintTop_toBottomOf="@+id/tvIdJuegoPreguntar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -121,7 +121,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/etComentario"
+            android:id="@+id/etPregunta"
             android:layout_width="250dp"
             android:layout_height="47dp"
             android:backgroundTint="@color/blueMain"

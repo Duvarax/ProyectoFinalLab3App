@@ -3,16 +3,16 @@ package com.duvarax.gamerasksapp.Models;
 import java.io.Serializable;
 
 public class Pregunta implements Serializable {
-    private int Id;
-    private String Texto;
+    private int id;
+    private String texto;
     private String fechaCreacion;
     private Usuario usuario;
     private Juego juego;
     private String captura;
 
     public Pregunta(int id, String texto, String fechaCreacion, Usuario usuario, Juego juego, String captura) {
-        Id = id;
-        Texto = texto;
+        this.id = id;
+        this.texto = texto;
         this.fechaCreacion = fechaCreacion;
         this.usuario = usuario;
         this.juego = juego;
@@ -20,19 +20,19 @@ public class Pregunta implements Serializable {
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getTexto() {
-        return Texto;
+        return texto;
     }
 
     public void setTexto(String texto) {
-        Texto = texto;
+        this.texto = texto;
     }
 
     public String getFechaCreacion() {

@@ -2,10 +2,13 @@ package com.duvarax.gamerasksapp.ui.Perfil;
 
 import static android.Manifest.permission_group.CAMERA;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,6 +37,8 @@ import com.duvarax.gamerasksapp.Models.Usuario;
 import com.duvarax.gamerasksapp.R;
 import com.duvarax.gamerasksapp.databinding.FragmentPerfilBinding;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +50,7 @@ public class PerfilFragment extends Fragment {
     private PerfilViewModel mv;
     private Handler sliderHandler = new Handler();
     private Runnable sliderCambio;
-    public static int objetivoCamara;
+    public int objetivoCamara;
     private static int REQUEST_IMAGE_CAPTURE=1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -62,7 +68,7 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 validaPermisos();
-                tomarFoto(v,R.id.btnCambiarFoto);
+                tomarFoto(v,R.id.ivImagenPerfil);
             }
         });
 
@@ -70,7 +76,7 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 validaPermisos();
-                tomarFoto(v, R.id.btnCambiarPortada);
+                tomarFoto(v, R.id.ivPortadaPerfil);
             }
         });
 
@@ -146,13 +152,29 @@ public class PerfilFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                Uri imagenUri = data.getData();
+                if (imagenUri != null) {
 
-        mv.setFoto(requestCode, resultCode, data,REQUEST_IMAGE_CAPTURE, objetivoCamara);
-        objetivoCamara = 0;
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                        ImageView iv = getActivity().findViewById(objetivoCamara);
+                        iv.setImageBitmap(bitmap);
+                        mv.setFoto(requestCode, resultCode, data, REQUEST_IMAGE_CAPTURE, objetivoCamara);
+                        objetivoCamara = 0;
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }
     }
 
 
-    private boolean validaPermisos() {
+        private boolean validaPermisos() {
 
         if(Build.VERSION.SDK_INT<Build.VERSION_CODES.M){
             return true;

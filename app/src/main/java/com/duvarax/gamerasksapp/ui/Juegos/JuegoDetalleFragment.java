@@ -48,7 +48,7 @@ public class JuegoDetalleFragment extends Fragment {
         binding.btnPreguntar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(getActivity(),R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_hacer_pregunta);
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_hacer_pregunta, data);
             }
         });
 

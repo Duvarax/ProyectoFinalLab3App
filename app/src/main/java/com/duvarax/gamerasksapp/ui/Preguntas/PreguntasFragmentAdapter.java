@@ -47,19 +47,6 @@ public class PreguntasFragmentAdapter extends RecyclerView.Adapter<PreguntasFrag
                 .into(holder.portadaJuego);
 
         holder.pregunta.setText(listaPreguntas.get(position).getTexto());
-        if(listaPreguntas.get(position).getCaptura() == null || listaPreguntas.get(position).getCaptura() == ""){
-            holder.captura.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, "A", Toast.LENGTH_SHORT).show();
-                    //iniciar camara o galeria
-                }
-            });
-        }else{
-            Glide.with(context)
-                    .load(listaPreguntas.get(position).getCaptura())
-                    .into(holder.captura);
-        }
         holder.btRespuestas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,13 +63,11 @@ public class PreguntasFragmentAdapter extends RecyclerView.Adapter<PreguntasFrag
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView portadaJuego;
-        ImageView captura;
         TextView pregunta;
         Button btRespuestas;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             portadaJuego = itemView.findViewById(R.id.ivPortadaJuego);
-            captura = itemView.findViewById(R.id.ivCaptura);
             pregunta = itemView.findViewById(R.id.tvPregunta);
             btRespuestas = itemView.findViewById(R.id.btnRespuestas);
         }

@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -140,12 +141,15 @@ public class PerfilViewModel extends AndroidViewModel {
     }
 
     public void setFoto(int requestCode, int resultCode, @Nullable Intent data, int REQUEST_IMAGE_CAPTURE, int objetivo){
-        if(objetivo == R.id.btnCambiarFoto){
+        if(objetivo == R.id.ivImagenPerfil){
             if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
                 if (data != null) {
                     Uri imagenUri = data.getData();
                     if (imagenUri != null) {
+
                         try {
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), data.getData());
+
                             InputStream inputStream = context.getContentResolver().openInputStream(imagenUri);
                             byte[] imagenBytes = getBytesFromInputStream(inputStream);
                             // Enviar la imagen al servidor
@@ -153,7 +157,7 @@ public class PerfilViewModel extends AndroidViewModel {
                             String token = sp.getString("token", "");
                             ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
                             RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), imagenBytes);
-                            MultipartBody.Part imagenParte = MultipartBody.Part.createFormData("imagen", "imagen.jpg", requestBody);
+                            MultipartBody.Part imagenParte = MultipartBody.Part.createFormData("imagen", "imagen_"+usuarioMutable.getValue().id + ".jpg", requestBody);
                             Call<String> cambiarFotoCall = end.cambiarFoto(token, imagenParte);
                             cambiarFotoCall.enqueue(new Callback<String>() {
                                 @Override

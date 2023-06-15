@@ -29,17 +29,6 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <ImageView
-            android:id="@+id/ivCaptura"
-            android:layout_width="29dp"
-            android:layout_height="29dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.958"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/camara_icon" />
-
-        <ImageView
             android:id="@+id/ivPortadaJuego"
             android:layout_width="84dp"
             android:layout_height="81dp"
@@ -54,22 +43,21 @@
             android:id="@+id/constraintLayout6"
             android:layout_width="263dp"
             android:layout_height="80dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/rounded_border_solid"
-            app:layout_constraintBottom_toTopOf="@+id/ivCaptura"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.479"
             app:layout_constraintStart_toEndOf="@+id/ivPortadaJuego"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.484">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/tvPregunta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pregunta"
                 android:fontFamily="@font/oswald_regular"
-                android:textSize="16dp"
+                android:text="Pregunta"
                 android:textColor="@color/blueMain"
+                android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
