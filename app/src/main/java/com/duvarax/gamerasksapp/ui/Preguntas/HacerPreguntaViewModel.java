@@ -41,7 +41,8 @@ public class HacerPreguntaViewModel extends AndroidViewModel {
     private MutableLiveData<Juego> juegoMutable;
     private MutableLiveData<Integer> envioSatisfactorioMutable;
     private MutableLiveData<String> capturaMutable;
-    public String urlCaptura;
+    public String urlCaptura = "";
+    public String publicIdCaptura = "";
     public HacerPreguntaViewModel(@NonNull Application application) {
         super(application);
         context = application.getApplicationContext();
@@ -75,7 +76,7 @@ public class HacerPreguntaViewModel extends AndroidViewModel {
         String token = sp.getString("token", "");
         ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
         Pregunta pregunta;
-        pregunta = new Pregunta(0, texto, null,  new Usuario(0, "","","","","","",""), juegoMutable.getValue(), urlCaptura, null);
+        pregunta = new Pregunta(0, texto, null,  new Usuario(0, "","","","","","",""), juegoMutable.getValue(), urlCaptura, publicIdCaptura);
         Call<Pregunta> callAltaPregunta = end.altaPregunta(token, pregunta);
         callAltaPregunta.enqueue(new Callback<Pregunta>() {
             @Override
@@ -117,7 +118,9 @@ public class HacerPreguntaViewModel extends AndroidViewModel {
                             if (response.isSuccessful()){
                                 if(response.body() != null){
                                     Toast.makeText(context, "Imagen guardada", Toast.LENGTH_SHORT).show();
+                                    Log.d("salida", response.body().toString());
                                     urlCaptura = response.body().getUrl();
+                                    publicIdCaptura = response.body().getPublicId();
                                     capturaMutable.postValue(response.body().getUrl());
                                 }
                             }else{

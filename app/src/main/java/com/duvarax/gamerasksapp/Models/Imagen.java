@@ -34,4 +34,13 @@ public class Imagen {
     public void setPublicId(String publicId) {
         this.publicId = publicId;
     }
+
+    @Override
+    public String toString() {
+        return "Imagen{" +
+                "id=" + id +
+                ", urlImagen='" + urlImagen + '\'' +
+                ", publicId='" + publicId + '\'' +
+                '}';
+    }
 }

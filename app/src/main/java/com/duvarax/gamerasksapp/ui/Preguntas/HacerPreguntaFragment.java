@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -83,9 +84,12 @@ public class HacerPreguntaFragment extends Fragment {
             }
         });
         mv.getCapturaMutable().observe(getActivity(), new Observer<String>() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onChanged(String s) {
                 Glide.with(getContext()).load(s).into(binding.ivCapturaView);
+                binding.btnEnviarPregunta.setEnabled(true);
+                binding.btnEnviarPregunta.setBackgroundColor(R.color.white);
             }
         });
 

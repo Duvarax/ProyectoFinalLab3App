@@ -9,7 +9,7 @@ public class Pregunta implements Serializable {
     private Usuario usuario;
     private Juego juego;
     private String captura;
-    private String capturaPublicId;
+    private String publicIdCaptura;
 
     public Pregunta(int id, String texto, String fechaCreacion, Usuario usuario, Juego juego, String captura, String capturaPublicId) {
         this.id = id;
@@ -18,15 +18,15 @@ public class Pregunta implements Serializable {
         this.usuario = usuario;
         this.juego = juego;
         this.captura = captura;
-        this.capturaPublicId = capturaPublicId;
+        this.publicIdCaptura = capturaPublicId;
     }
 
     public String getCapturaPublicId() {
-        return capturaPublicId;
+        return publicIdCaptura;
     }
 
     public void setCapturaPublicId(String capturaPublicId) {
-        this.capturaPublicId = capturaPublicId;
+        this.publicIdCaptura = capturaPublicId;
     }
 
     public int getId() {
