@@ -2,6 +2,7 @@ package com.duvarax.gamerasksapp.Request;
 
 import com.duvarax.gamerasksapp.Models.EditContraseña;
 import com.duvarax.gamerasksapp.Models.Juego;
+import com.duvarax.gamerasksapp.Models.JuegoBuscar;
 import com.duvarax.gamerasksapp.Models.Pregunta;
 import com.duvarax.gamerasksapp.Models.Usuario;
 import com.duvarax.gamerasksapp.Models.UsuarioLogin;
@@ -75,9 +76,17 @@ public class ApiClient {
 
         @POST("Pregunta/cantidad")
         Call<Integer> obtenerCantidadPreguntasXJuego(@Header("Authorization") String token,@Body Juego juego);
+        @Multipart
+        @POST("Pregunta/captura")
+        Call<String> getCaptura(@Header("Authorization") String token, @Part MultipartBody.Part captura);
 
+
+        @POST("Juego")
+        Call<Juego> añadirJuego(@Header("Authorization") String token, @Body Juego juego);
         @GET("Juego/obtener")
         Call<ArrayList<Juego>> obtenerJuegos(@Header("Authorization") String token);
+        @POST("Juego/buscar")
+        Call<ArrayList<Juego>> buscarJuegos(@Header("Authorization") String token, @Body JuegoBuscar juego);
 
 
     }

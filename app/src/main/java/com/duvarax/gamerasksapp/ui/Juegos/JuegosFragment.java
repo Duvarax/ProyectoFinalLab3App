@@ -3,6 +3,7 @@ package com.duvarax.gamerasksapp.ui.Juegos;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,15 @@ public class JuegosFragment extends Fragment {
                 binding.rvListaJuegos.setAdapter(adapter);
             }
         });
+        mv.getListaJuegosBuscados().observe(getActivity(), new Observer<ArrayList<Juego>>() {
+            @Override
+            public void onChanged(ArrayList<Juego> juegos) {
+                GridLayoutManager grid = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
+                binding.rvListaJuegos.setLayoutManager(grid);
+                JuegosFragmentAdapter adapter = new JuegosFragmentAdapter(getContext(), getLayoutInflater(),juegos, getActivity());
+                binding.rvListaJuegos.setAdapter(adapter);
+            }
+        });
 
         mv.obtenerListaJuegos();
 
@@ -53,6 +63,7 @@ public class JuegosFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), binding.etBuscarJuego.getText().toString(), Toast.LENGTH_SHORT).show();
+                mv.obtenerJuegosBuscado(binding.etBuscarJuego.getText().toString());
             }
         });
         return root;

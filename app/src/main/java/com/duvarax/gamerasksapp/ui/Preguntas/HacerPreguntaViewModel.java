@@ -37,6 +37,7 @@ public class HacerPreguntaViewModel extends AndroidViewModel {
 
     private MutableLiveData<Juego> juegoMutable;
     private MutableLiveData<Integer> envioSatisfactorioMutable;
+    public static String capturaUrl = null;
     public HacerPreguntaViewModel(@NonNull Application application) {
         super(application);
         context = application.getApplicationContext();
@@ -63,7 +64,7 @@ public class HacerPreguntaViewModel extends AndroidViewModel {
         SharedPreferences sp = context.getSharedPreferences("token.xml", -1);
         String token = sp.getString("token", "");
         ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
-        Pregunta pregunta = new Pregunta(0, texto, "", null, juegoMutable.getValue(), captura);
+        Pregunta pregunta = new Pregunta(0, texto, "", null, juegoMutable.getValue(), capturaUrl);
         Call<Integer> callAltaPregunta = end.altaPregunta(token, pregunta);
         callAltaPregunta.enqueue(new Callback<Integer>() {
             @Override
@@ -99,18 +100,15 @@ public class HacerPreguntaViewModel extends AndroidViewModel {
                         String token = sp.getString("token", "");
                         ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
                         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), imagenBytes);
-                        MultipartBody.Part imagenParte = MultipartBody.Part.createFormData("imagen", "imagen.jpg", requestBody);
-                        Call<String> cambiarFotoCall = end.cambiarFoto(token, imagenParte);
-                        cambiarFotoCall.enqueue(new Callback<String>() {
+                        MultipartBody.Part imagenParte = MultipartBody.Part.createFormData("imagen", "imagen_" + juegoMutable.getValue().getId() + ".jpg", requestBody);
+                        Call<String> callCaptura = end.getCaptura(token, imagenParte);
+                        callCaptura.enqueue(new Callback<String>() {
                             @Override
                             public void onResponse(Call<String> call, Response<String> response) {
-                                if (response.isSuccessful()) {
-                                    if (response.body() != null) {
-                                        Toast.makeText(context, "Foto cambiada", Toast.LENGTH_SHORT).show();
+                                if (response.isSuccessful()){
+                                    if(response.body() != null){
+                                        Toast.makeText(context, "Captura guardada", Toast.LENGTH_SHORT).show();
                                     }
-                                } else {
-                                    Log.d("salida", response.toString());
-                                    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                                 }
                             }
 

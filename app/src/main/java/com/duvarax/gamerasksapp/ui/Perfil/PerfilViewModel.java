@@ -51,7 +51,7 @@ public class PerfilViewModel extends AndroidViewModel {
     private MutableLiveData<ArrayList<Juego>> juegosRecientesMutable;
     private MutableLiveData<String> fotoMutable;
     private MutableLiveData<String> portadaMutable;
-    private MutableLiveData<Bitmap> bitmapMutableLiveData;
+
 
 
     public PerfilViewModel(@NonNull Application application) {
@@ -64,12 +64,6 @@ public class PerfilViewModel extends AndroidViewModel {
             usuarioMutable = new MutableLiveData<>();
         }
         return usuarioMutable;
-    }
-    public LiveData<Bitmap> getBitmapFoto(){
-        if(bitmapMutableLiveData == null){
-            bitmapMutableLiveData = new MutableLiveData<>();
-        }
-        return bitmapMutableLiveData;
     }
 
     public LiveData<ArrayList<Juego>> getListaRecientes(){
@@ -155,8 +149,7 @@ public class PerfilViewModel extends AndroidViewModel {
                 if (imagenUri != null) {
                     if (objetivo == R.id.ivImagenPerfil) {
                         try {
-                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), data.getData());
-                            bitmapMutableLiveData.setValue(bitmap);
+
                             InputStream inputStream = context.getContentResolver().openInputStream(imagenUri);
                             byte[] imagenBytes = getBytesFromInputStream(inputStream);
                             // Enviar la imagen al servidor

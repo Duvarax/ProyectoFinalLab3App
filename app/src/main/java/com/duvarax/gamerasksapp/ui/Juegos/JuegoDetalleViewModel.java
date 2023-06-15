@@ -42,7 +42,25 @@ public class JuegoDetalleViewModel extends AndroidViewModel {
 
 
     public void obtenerJuego(Juego juego){
-        juegoMutable.setValue(juego);
+        SharedPreferences sp = context.getSharedPreferences("token.xml", -1);
+        String token = sp.getString("token", "");
+        ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
+        Call<Juego> callJuego = end.añadirJuego(token, juego);
+        callJuego.enqueue(new Callback<Juego>() {
+            @Override
+            public void onResponse(Call<Juego> call, Response<Juego> response) {
+                if(response.isSuccessful()){
+                    if (response != null){
+                        juegoMutable.postValue(response.body());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Juego> call, Throwable t) {
+
+            }
+        });
     }
     public void obtenerCantidadPreguntas(Juego juego){
         SharedPreferences sp = context.getSharedPreferences("token.xml", -1);

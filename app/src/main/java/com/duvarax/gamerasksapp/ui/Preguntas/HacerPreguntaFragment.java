@@ -13,6 +13,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -25,6 +27,7 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
@@ -32,6 +35,9 @@ import com.bumptech.glide.Glide;
 import com.duvarax.gamerasksapp.Models.Juego;
 import com.duvarax.gamerasksapp.R;
 import com.duvarax.gamerasksapp.databinding.FragmentHacerPreguntaBinding;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class HacerPreguntaFragment extends Fragment {
 
@@ -102,7 +108,23 @@ public class HacerPreguntaFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        mv.setCaptura(requestCode, resultCode, data,REQUEST_IMAGE_CAPTURE);
+
+        if (data != null) {
+            Uri imagenUri = data.getData();
+            if (imagenUri != null) {
+
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                    ImageView iv = getActivity().findViewById(R.id.ivCapturaView);
+                    iv.setImageBitmap(bitmap);
+                    mv.setCaptura(requestCode, resultCode, data,REQUEST_IMAGE_CAPTURE);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
 
     }
     private boolean validaPermisos() {

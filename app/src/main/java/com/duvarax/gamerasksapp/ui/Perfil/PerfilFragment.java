@@ -77,12 +77,6 @@ public class PerfilFragment extends Fragment {
             }
         });
 
-        mv.getBitmapFoto().observe(getActivity(), new Observer<Bitmap>() {
-            @Override
-            public void onChanged(Bitmap bitmap) {
-                binding.ivImagenPerfil.setImageBitmap(bitmap);
-            }
-        });
 
         mv.getListaRecientes().observe(getActivity(), new Observer<ArrayList<Juego>>() {
             @Override
@@ -173,7 +167,7 @@ public class PerfilFragment extends Fragment {
     }
 
 
-        private boolean validaPermisos() {
+    private boolean validaPermisos() {
 
         if(Build.VERSION.SDK_INT<Build.VERSION_CODES.M){
             return true;

@@ -24,24 +24,24 @@
 
     <ImageView
         android:id="@+id/ivPortadaJuegoPreguntar"
-        android:layout_width="126dp"
-        android:layout_height="124dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="189dp"
+        android:layout_height="179dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
         tools:src="@tools:sample/avatars" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout7"
-        android:layout_width="211dp"
-        android:layout_height="121dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="354dp"
+        android:layout_height="84dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/rounded_border"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
-        app:layout_constraintStart_toEndOf="@+id/ivPortadaJuegoPreguntar"
-        app:layout_constraintTop_toBottomOf="@+id/textView6">
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivPortadaJuegoPreguntar">
 
         <TextView
             android:id="@+id/textviewr"
@@ -63,7 +63,6 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/oswald_regular"
-            android:text="Id:"
             android:textColor="@color/black"
             android:textSize="14dp"
             app:layout_constraintStart_toEndOf="@+id/textviewr"
@@ -74,9 +73,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/oswald_regular"
-            android:text="Nickname:"
+            android:text="Nombre:"
             android:textColor="@color/blueMain"
             android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,10 +85,9 @@
             android:id="@+id/tvNombreJuegoPreguntar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/oswald_regular"
-            android:text="Nickname:"
             android:textColor="@color/black"
             android:textSize="14dp"
             app:layout_constraintStart_toEndOf="@+id/textview2"
@@ -100,10 +98,9 @@
         android:id="@+id/constraintLayout3"
         android:layout_width="351dp"
         android:layout_height="62dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/rounded_border"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
 
@@ -139,8 +136,8 @@
 
     <ImageView
         android:id="@+id/ivCapturaView"
-        android:layout_width="37dp"
-        android:layout_height="36dp"
+        android:layout_width="49dp"
+        android:layout_height="48dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="20dp"
         android:src="@drawable/camara_icon"
@@ -165,7 +162,7 @@
         android:id="@+id/btnEnviarPregunta"
         android:layout_width="157dp"
         android:layout_height="58dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="52dp"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/oswald_regular"
         android:text="Enviar"

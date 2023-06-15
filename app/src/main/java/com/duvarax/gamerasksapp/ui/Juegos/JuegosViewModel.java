@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.duvarax.gamerasksapp.Models.Juego;
+import com.duvarax.gamerasksapp.Models.JuegoBuscar;
 import com.duvarax.gamerasksapp.Models.Pregunta;
 import com.duvarax.gamerasksapp.Request.ApiClient;
 
@@ -25,6 +26,7 @@ public class JuegosViewModel extends AndroidViewModel {
 
     private Context context;
     private MutableLiveData<ArrayList<Juego>> listaJuegosMutable;
+    private MutableLiveData<ArrayList<Juego>> listaJuegosBuscadosMutable;
 
     public JuegosViewModel(@NonNull Application application) {
         super(application);
@@ -36,6 +38,12 @@ public class JuegosViewModel extends AndroidViewModel {
             listaJuegosMutable = new MutableLiveData<>();
         }
         return listaJuegosMutable;
+    }
+    public LiveData<ArrayList<Juego>> getListaJuegosBuscados(){
+        if(listaJuegosBuscadosMutable == null){
+            listaJuegosBuscadosMutable = new MutableLiveData<>();
+        }
+        return listaJuegosBuscadosMutable;
     }
 
     public void obtenerListaJuegos(){
@@ -61,5 +69,33 @@ public class JuegosViewModel extends AndroidViewModel {
                 Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    public void obtenerJuegosBuscado(String busqueda){
+        if(busqueda == ""){
+            obtenerListaJuegos();
+        }else{
+
+
+        SharedPreferences sp = context.getSharedPreferences("token.xml", -1);
+        String token = sp.getString("token", "");
+        ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
+        JuegoBuscar jg = new JuegoBuscar(busqueda);
+        Call<ArrayList<Juego>> callJuegosBuscados = end.buscarJuegos(token, jg);
+        callJuegosBuscados.enqueue(new Callback<ArrayList<Juego>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Juego>> call, Response<ArrayList<Juego>> response) {
+                if(response.isSuccessful()){
+                    if (response.body() != null){
+                        listaJuegosBuscadosMutable.postValue(response.body());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Juego>> call, Throwable t) {
+
+            }
+        });
+        }
     }
 }
