@@ -51,6 +51,7 @@ public class PerfilViewModel extends AndroidViewModel {
     private MutableLiveData<ArrayList<Juego>> juegosRecientesMutable;
     private MutableLiveData<String> fotoMutable;
     private MutableLiveData<String> portadaMutable;
+    private MutableLiveData<Bitmap> bitmapMutableLiveData;
 
 
     public PerfilViewModel(@NonNull Application application) {
@@ -63,6 +64,12 @@ public class PerfilViewModel extends AndroidViewModel {
             usuarioMutable = new MutableLiveData<>();
         }
         return usuarioMutable;
+    }
+    public LiveData<Bitmap> getBitmapFoto(){
+        if(bitmapMutableLiveData == null){
+            bitmapMutableLiveData = new MutableLiveData<>();
+        }
+        return bitmapMutableLiveData;
     }
 
     public LiveData<ArrayList<Juego>> getListaRecientes(){
@@ -140,16 +147,16 @@ public class PerfilViewModel extends AndroidViewModel {
         });
     }
 
-    public void setFoto(int requestCode, int resultCode, @Nullable Intent data, int REQUEST_IMAGE_CAPTURE, int objetivo){
-        if(objetivo == R.id.ivImagenPerfil){
-            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-                if (data != null) {
-                    Uri imagenUri = data.getData();
-                    if (imagenUri != null) {
+    public void setFoto(int requestCode, int resultCode, @Nullable Intent data, int REQUEST_IMAGE_CAPTURE, int objetivo) {
 
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                Uri imagenUri = data.getData();
+                if (imagenUri != null) {
+                    if (objetivo == R.id.ivImagenPerfil) {
                         try {
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), data.getData());
-
+                            bitmapMutableLiveData.setValue(bitmap);
                             InputStream inputStream = context.getContentResolver().openInputStream(imagenUri);
                             byte[] imagenBytes = getBytesFromInputStream(inputStream);
                             // Enviar la imagen al servidor
@@ -157,17 +164,17 @@ public class PerfilViewModel extends AndroidViewModel {
                             String token = sp.getString("token", "");
                             ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
                             RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), imagenBytes);
-                            MultipartBody.Part imagenParte = MultipartBody.Part.createFormData("imagen", "imagen_"+usuarioMutable.getValue().id + ".jpg", requestBody);
+                            MultipartBody.Part imagenParte = MultipartBody.Part.createFormData("imagen", "imagen_" + usuarioMutable.getValue().id + ".jpg", requestBody);
                             Call<String> cambiarFotoCall = end.cambiarFoto(token, imagenParte);
                             cambiarFotoCall.enqueue(new Callback<String>() {
                                 @Override
                                 public void onResponse(Call<String> call, Response<String> response) {
-                                    if(response.isSuccessful()){
-                                        if (response.body() != null){
+                                    if (response.isSuccessful()) {
+                                        if (response.body() != null) {
                                             Toast.makeText(context, "Foto cambiada", Toast.LENGTH_SHORT).show();
                                             fotoMutable.postValue(response.body());
                                         }
-                                    }else{
+                                    } else {
                                         Log.d("salida", response.toString());
                                         Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                                     }
@@ -181,14 +188,7 @@ public class PerfilViewModel extends AndroidViewModel {
                         } catch (IOException e) {
                             Log.d("salida", e.toString());
                         }
-                    }
-                }
-            }
-        }else{
-            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-                if (data != null) {
-                    Uri imagenUri = data.getData();
-                    if (imagenUri != null) {
+                    } else {
                         try {
                             InputStream inputStream = context.getContentResolver().openInputStream(imagenUri);
                             byte[] imagenBytes = getBytesFromInputStream(inputStream);
@@ -202,8 +202,8 @@ public class PerfilViewModel extends AndroidViewModel {
                             cambiarPortadaCall.enqueue(new Callback<String>() {
                                 @Override
                                 public void onResponse(Call<String> call, Response<String> response) {
-                                    if(response.isSuccessful()){
-                                        if(response != null){
+                                    if (response.isSuccessful()) {
+                                        if (response != null) {
                                             Toast.makeText(context, "Foto cambiada", Toast.LENGTH_SHORT).show();
                                             portadaMutable.postValue(response.body());
                                         }
@@ -223,8 +223,15 @@ public class PerfilViewModel extends AndroidViewModel {
                 }
             }
         }
-
     }
+
+
+
+
+
+
+
+
 
 
     private byte[] getBytesFromInputStream(InputStream inputStream) throws IOException {

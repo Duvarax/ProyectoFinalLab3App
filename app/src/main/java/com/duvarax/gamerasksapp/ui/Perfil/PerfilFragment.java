@@ -64,21 +64,7 @@ public class PerfilFragment extends Fragment {
 
 
 
-        binding.btnCambiarFoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                validaPermisos();
-                tomarFoto(v,R.id.ivImagenPerfil);
-            }
-        });
 
-        binding.btnCambiarPortada.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                validaPermisos();
-                tomarFoto(v, R.id.ivPortadaPerfil);
-            }
-        });
 
         mv.getUsuarioLogeado().observe(getActivity(), new Observer<Usuario>() {
             @Override
@@ -91,11 +77,10 @@ public class PerfilFragment extends Fragment {
             }
         });
 
-        mv.getFotoMutable().observe(getActivity(), new Observer<String>() {
+        mv.getBitmapFoto().observe(getActivity(), new Observer<Bitmap>() {
             @Override
-            public void onChanged(String s) {
-
-                Glide.with(getActivity()).load(s).into(binding.ivImagenPerfil);
+            public void onChanged(Bitmap bitmap) {
+                binding.ivImagenPerfil.setImageBitmap(bitmap);
             }
         });
 
@@ -129,7 +114,21 @@ public class PerfilFragment extends Fragment {
 
 
 
+        binding.btnCambiarFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validaPermisos();
+                tomarFoto(v,R.id.ivImagenPerfil);
+            }
+        });
 
+        binding.btnCambiarPortada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validaPermisos();
+                tomarFoto(v, R.id.ivPortadaPerfil);
+            }
+        });
         mv.setUsuarioLogeado();
 
 
