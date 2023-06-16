@@ -32,13 +32,16 @@ public class CapturaFragment extends Fragment {
         binding = FragmentCapturaBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         mv = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(CapturaViewModel.class);
-
+        Bundle data = getArguments();
+        String urlCaptura = data.getString("captura");
         mv.getCapturaMutable().observe(getActivity(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 Glide.with(getContext()).load(s).into(binding.ivCapturaVer);
             }
         });
+
+        mv.setCapturaMutable(urlCaptura);
         return root;
     }
 

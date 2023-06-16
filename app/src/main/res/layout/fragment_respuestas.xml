@@ -10,6 +10,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListaRespuestas"
+        android:padding="10dp"
         android:layout_width="378dp"
         android:layout_height="398dp"
         android:layout_marginBottom="40dp"
@@ -48,9 +49,9 @@
             android:id="@+id/btnDetallePregunta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="332dp"
+            android:layout_marginStart="280dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="1dp"
             android:backgroundTint="@color/black"
             android:fontFamily="@font/oswald_regular"
             android:text="Detalle"
@@ -63,10 +64,10 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout6"
-            android:layout_width="263dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="24dp"
+            android:layout_width="262dp"
+            android:layout_height="61dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/rounded_border_solid"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -105,7 +106,7 @@
             android:backgroundTint="@color/blueMain"
             android:ems="10"
             android:fontFamily="@font/oswald_regular"
-            android:hint="Ingrese su Clave"
+            android:hint="Ingrese su respuesta"
             android:inputType="textPersonName"
             android:textColor="@color/blueMain"
             android:textColorHint="@color/black"

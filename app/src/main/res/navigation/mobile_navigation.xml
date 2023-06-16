@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/navigation_juegos"
         android:name="com.duvarax.gamerasksapp.ui.Juegos.JuegosFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_juegos" >
+        android:label="Listado de juegos"
+        tools:layout="@layout/fragment_juegos">
         <action
             android:id="@+id/action_navigation_juegos_to_navigation_detalle_juego"
             app:destination="@id/navigation_detalle_juego" />
@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_navigation_preguntas_to_capturaFragment"
             app:destination="@id/navigation_captura_ver" />
+        <action
+            android:id="@+id/action_navigation_preguntas_to_navigation_respuestas"
+            app:destination="@id/navigation_respuestas" />
     </fragment>
     <fragment
         android:id="@+id/navigation_detalle_juego"
@@ -63,6 +66,9 @@
         <action
             android:id="@+id/action_navigation_preguntas_x_juego_to_capturaFragment"
             app:destination="@id/navigation_captura_ver" />
+        <action
+            android:id="@+id/action_navigation_preguntas_x_juego_to_navigation_respuestas"
+            app:destination="@id/navigation_respuestas" />
     </fragment>
     <fragment
         android:id="@+id/navigation_hacer_pregunta"
@@ -102,5 +108,27 @@
         <action
             android:id="@+id/action_capturaFragment_to_navigation_preguntas"
             app:destination="@id/navigation_preguntas" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_respuestas"
+        android:name="com.duvarax.gamerasksapp.ui.Preguntas.Respuestas.RespuestasFragment"
+        android:label="Respuestas">
+        <action
+            android:id="@+id/action_navigation_respuestas_to_navigation_preguntas"
+            app:destination="@id/navigation_preguntas" />
+        <action
+            android:id="@+id/action_navigation_respuestas_to_navigation_preguntas_x_juego"
+            app:destination="@id/navigation_preguntas_x_juego" />
+        <action
+            android:id="@+id/action_navigation_respuestas_to_navigation_comentarios"
+            app:destination="@id/navigation_comentarios" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_comentarios"
+        android:name="com.duvarax.gamerasksapp.ui.Preguntas.Respuestas.Comentarios.ComentariosFragment"
+        android:label="Comentarios" >
+        <action
+            android:id="@+id/action_navigation_comentarios_to_navigation_respuestas"
+            app:destination="@id/navigation_respuestas" />
     </fragment>
 </navigation>

@@ -1,10 +1,12 @@
 package com.duvarax.gamerasksapp.Request;
 
+import com.duvarax.gamerasksapp.Models.Comentario;
 import com.duvarax.gamerasksapp.Models.Imagen;
 import com.duvarax.gamerasksapp.Models.EditContraseña;
 import com.duvarax.gamerasksapp.Models.Juego;
 import com.duvarax.gamerasksapp.Models.JuegoBuscar;
 import com.duvarax.gamerasksapp.Models.Pregunta;
+import com.duvarax.gamerasksapp.Models.Respuesta;
 import com.duvarax.gamerasksapp.Models.Usuario;
 import com.duvarax.gamerasksapp.Models.UsuarioLogin;
 import com.google.gson.Gson;
@@ -80,6 +82,15 @@ public class ApiClient {
         @POST("Pregunta/juego")
         Call<ArrayList<Pregunta>> obtenerPreguntasXJuego(@Header("Authorization") String token, @Body Juego juego);
 
+        @POST("Respuesta")
+        Call<ArrayList<Respuesta>> obtenerRespuestasDePregunta(@Header("Authorization") String token, @Body Pregunta pregunta);
+        @POST("Respuesta/guardar")
+        Call<Respuesta> altaRespuesta(@Header("Authorization") String token, @Body Respuesta respuesta);
+
+        @POST("Comentario")
+        Call<ArrayList<Comentario>> obtenerComentarios(@Header("Authorization") String token, @Body Respuesta respuesta);
+        @POST("Comentario/guardar")
+        Call<Comentario> altaComentario(@Header("Authorization") String token, @Body Comentario comentario);
 
         @POST("Juego")
         Call<Juego> añadirJuego(@Header("Authorization") String token, @Body Juego juego);

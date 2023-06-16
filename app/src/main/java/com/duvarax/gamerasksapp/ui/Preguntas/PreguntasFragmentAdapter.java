@@ -2,6 +2,7 @@ package com.duvarax.gamerasksapp.ui.Preguntas;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -50,8 +52,9 @@ public class PreguntasFragmentAdapter extends RecyclerView.Adapter<PreguntasFrag
         holder.btRespuestas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //navegar a las respuestas de esa pregunta
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("pregunta", listaPreguntas.get(position));
+                Navigation.findNavController(activity,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_respuestas, bundle);
             }
         });
     }

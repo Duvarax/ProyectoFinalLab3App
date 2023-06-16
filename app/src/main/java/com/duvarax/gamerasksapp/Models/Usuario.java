@@ -22,6 +22,9 @@ public class Usuario {
         this.portada = portada;
     }
 
+    public Usuario() {
+    }
+
     public int getId() {
         return id;
     }

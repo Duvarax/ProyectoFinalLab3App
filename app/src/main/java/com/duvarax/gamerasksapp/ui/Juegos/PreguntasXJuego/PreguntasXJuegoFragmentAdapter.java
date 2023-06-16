@@ -47,6 +47,12 @@ public class PreguntasXJuegoFragmentAdapter extends RecyclerView.Adapter<Pregunt
         Glide.with(context)
                 .load(listaPreguntas.get(position).getUsuario().getImagen())
                 .into(holder.imagenUsuario);
+        holder.imagenUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         holder.pregunta.setText(listaPreguntas.get(position).getTexto());
         if(listaPreguntas.get(position).getCaptura() == null || listaPreguntas.get(position).getCaptura() == ""){
@@ -67,8 +73,9 @@ public class PreguntasXJuegoFragmentAdapter extends RecyclerView.Adapter<Pregunt
         holder.btRespuestas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //navegar a las respuestas de esa pregunta
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("pregunta", listaPreguntas.get(position));
+                Navigation.findNavController(activity,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_respuestas, bundle);
             }
         });
     }

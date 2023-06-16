@@ -76,7 +76,7 @@ public class HacerPreguntaViewModel extends AndroidViewModel {
         String token = sp.getString("token", "");
         ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
         Pregunta pregunta;
-        pregunta = new Pregunta(0, texto, null,  new Usuario(0, "","","","","","",""), juegoMutable.getValue(), urlCaptura, publicIdCaptura);
+        pregunta = new Pregunta(0, texto, null,  null, juegoMutable.getValue(), urlCaptura, publicIdCaptura);
         Call<Pregunta> callAltaPregunta = end.altaPregunta(token, pregunta);
         callAltaPregunta.enqueue(new Callback<Pregunta>() {
             @Override
