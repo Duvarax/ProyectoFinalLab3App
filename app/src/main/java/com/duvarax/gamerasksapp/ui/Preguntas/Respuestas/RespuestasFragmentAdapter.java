@@ -2,15 +2,18 @@ package com.duvarax.gamerasksapp.ui.Preguntas.Respuestas;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,12 +29,14 @@ public class RespuestasFragmentAdapter extends RecyclerView.Adapter<RespuestasFr
     private LayoutInflater inflater;
     private ArrayList<Respuesta> listaRespuestas;
     private Activity activity;
+    private RespuestasViewModel mv;
 
     public RespuestasFragmentAdapter(Context context, LayoutInflater inflater, ArrayList<Respuesta> listapreguntas, Activity activity) {
         this.context = context;
         this.inflater = inflater;
         this.listaRespuestas = listapreguntas;
         this.activity = activity;
+        mv = ViewModelProvider.AndroidViewModelFactory.getInstance(activity.getApplication()).create(RespuestasViewModel.class);
     }
 
     @NonNull
@@ -47,7 +52,21 @@ public class RespuestasFragmentAdapter extends RecyclerView.Adapter<RespuestasFr
         Glide.with(context)
                 .load(listaRespuestas.get(position).getUsuario().getImagen())
                 .into(holder.imagenUsuario);
-
+        holder.ibValorar.setImageResource(R.drawable.likent_icon);
+        holder.ibValorar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.ibValorar.setImageResource(R.drawable.like_icon);
+                mv.valorarRespuesta(listaRespuestas.get(position));
+                holder.ibValorar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        holder.ibValorar.setImageResource(R.drawable.likent_icon);
+                        mv.quitarValoracion(listaRespuestas.get(position));
+                    }
+                });
+            }
+        });
         holder.respuesta.setText(listaRespuestas.get(position).getTexto());
         holder.btComentario.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,11 +87,13 @@ public class RespuestasFragmentAdapter extends RecyclerView.Adapter<RespuestasFr
         ImageView imagenUsuario;
         TextView respuesta;
         Button btComentario;
+        ImageButton ibValorar;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imagenUsuario = itemView.findViewById(R.id.ivImagenUserRespuesta);
             respuesta = itemView.findViewById(R.id.tvRespuestaXPregunta);
             btComentario = itemView.findViewById(R.id.btnComentarios);
+            ibValorar = itemView.findViewById(R.id.ibValorar);
         }
     }
 }

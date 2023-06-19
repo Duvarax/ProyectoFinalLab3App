@@ -57,6 +57,14 @@ public class PreguntasFragmentAdapter extends RecyclerView.Adapter<PreguntasFrag
                 Navigation.findNavController(activity,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_respuestas, bundle);
             }
         });
+        holder.btDetalle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("pregunta", listaPreguntas.get(position));
+                Navigation.findNavController(activity,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_detalle_pregunta, bundle);
+            }
+        });
     }
 
     @Override
@@ -68,11 +76,13 @@ public class PreguntasFragmentAdapter extends RecyclerView.Adapter<PreguntasFrag
         ImageView portadaJuego;
         TextView pregunta;
         Button btRespuestas;
+        Button btDetalle;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             portadaJuego = itemView.findViewById(R.id.ivPortadaJuego);
             pregunta = itemView.findViewById(R.id.tvPregunta);
             btRespuestas = itemView.findViewById(R.id.btnRespuestas);
+            btDetalle = itemView.findViewById(R.id.btnDetallePreguntaUsuario);
         }
     }
 }

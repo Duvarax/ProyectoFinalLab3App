@@ -101,5 +101,13 @@ public class RespuestasViewModel extends AndroidViewModel {
         });
     }
 
+    public void valorarRespuesta(Respuesta respuesta){
+
+    }
+
+    public void quitarValoracion(Respuesta respuesta){
+
+    }
+
 
 }

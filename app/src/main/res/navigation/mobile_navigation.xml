@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_navigation_preguntas_to_navigation_respuestas"
             app:destination="@id/navigation_respuestas" />
+        <action
+            android:id="@+id/action_navigation_preguntas_to_navigation_detalle_pregunta"
+            app:destination="@id/navigation_detalle_pregunta" />
     </fragment>
     <fragment
         android:id="@+id/navigation_detalle_juego"
@@ -69,6 +72,9 @@
         <action
             android:id="@+id/action_navigation_preguntas_x_juego_to_navigation_respuestas"
             app:destination="@id/navigation_respuestas" />
+        <action
+            android:id="@+id/action_navigation_preguntas_x_juego_to_navigation_detalle_pregunta"
+            app:destination="@id/navigation_detalle_pregunta" />
     </fragment>
     <fragment
         android:id="@+id/navigation_hacer_pregunta"
@@ -130,5 +136,17 @@
         <action
             android:id="@+id/action_navigation_comentarios_to_navigation_respuestas"
             app:destination="@id/navigation_respuestas" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_detalle_pregunta"
+        android:name="com.duvarax.gamerasksapp.ui.Preguntas.DetallePreguntaFragment"
+        android:label="Detalle"
+        tools:layout="@layout/fragment_detalle_pregunta" >
+        <action
+            android:id="@+id/action_navigation_detalle_pregunta_to_navigation_preguntas"
+            app:destination="@id/navigation_preguntas" />
+        <action
+            android:id="@+id/action_navigation_detalle_pregunta_to_navigation_preguntas_x_juego"
+            app:destination="@id/navigation_preguntas_x_juego" />
     </fragment>
 </navigation>
