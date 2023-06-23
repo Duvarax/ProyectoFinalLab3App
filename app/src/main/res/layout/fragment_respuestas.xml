@@ -10,22 +10,20 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListaRespuestas"
-        android:padding="10dp"
         android:layout_width="378dp"
         android:layout_height="398dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_border"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout8"
-        app:layout_constraintVertical_bias="0.078" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout8"
-        android:layout_width="379dp"
-        android:layout_height="112dp"
+        android:layout_width="383dp"
+        android:layout_height="122dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/rounded_border_solid"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,8 +32,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/civUserPreguntaList"
-            android:layout_width="67dp"
-            android:layout_height="66dp"
+            android:layout_width="65dp"
+            android:layout_height="68dp"
             android:layout_marginTop="8dp"
             android:src="@drawable/lupa_icon"
             app:civ_border_color="@color/yellowMain"
@@ -49,8 +47,8 @@
             android:id="@+id/btnDetallePregunta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="276dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="1dp"
             android:backgroundTint="@color/black"
             android:fontFamily="@font/oswald_regular"
@@ -60,7 +58,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
-            app:layout_constraintVertical_bias="0.062" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout6"
@@ -86,28 +84,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageButton
-            android:id="@+id/ibValorar"
-            android:layout_width="36dp"
-            android:layout_height="34dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
-            app:layout_constraintVertical_bias="0.555"
-            tools:src="@tools:sample/avatars" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"
         android:layout_width="351dp"
         android:layout_height="62dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/rounded_border"
+        android:layout_marginBottom="96dp"
+        android:background="@drawable/rounded_et"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvListaRespuestas">
+        app:layout_constraintStart_toStartOf="parent">
 
         <EditText
             android:id="@+id/etRespuesta"

@@ -76,7 +76,7 @@ public class RespuestasViewModel extends AndroidViewModel {
         String token = sp.getString("token", "");
         ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
         Respuesta respuesta;
-        respuesta = new Respuesta(0, texto, null, preguntaMutable.getValue().getUsuario(), preguntaMutable.getValue());
+        respuesta = new Respuesta(0, texto, null, preguntaMutable.getValue().getUsuario(), preguntaMutable.getValue(), false);
         Call<Respuesta> callRespuesta = end.altaRespuesta(token, respuesta);
         callRespuesta.enqueue(new Callback<Respuesta>() {
             @Override
@@ -102,11 +102,49 @@ public class RespuestasViewModel extends AndroidViewModel {
     }
 
     public void valorarRespuesta(Respuesta respuesta){
+        SharedPreferences sp = context.getSharedPreferences("token.xml", -1);
+        String token = sp.getString("token", "");
+        ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
+        Call<Integer> callAltaValoracion = end.altaValoracion(token, respuesta);
+        callAltaValoracion.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if(response.isSuccessful()){
+                    if(response.body() != 0){
+                        Toast.makeText(context, "❤", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+
+            }
+        });
     }
 
     public void quitarValoracion(Respuesta respuesta){
+        SharedPreferences sp = context.getSharedPreferences("token.xml", -1);
+        String token = sp.getString("token", "");
+        ApiClient.EndPointGamerAsk end = ApiClient.getEndPointGamerAsk();
+        Call<Integer> callBajaValoracion = end.bajaValoracion(token, respuesta.getId());
+        callBajaValoracion.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if(response.isSuccessful()){
+                    if (response.body() != 0){
+                        Toast.makeText(context, "Like eliminado", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
 
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 

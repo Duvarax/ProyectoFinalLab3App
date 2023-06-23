@@ -38,7 +38,7 @@
             android:ems="10"
             android:fontFamily="@font/oswald_regular"
             android:hint="Ingrese su Clave"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
             android:textColor="@color/blueMain"
             android:textColorHint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"

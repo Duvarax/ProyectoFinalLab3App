@@ -48,4 +48,11 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        binding.etClave.setText("");
+        binding.etEmailLogin.setText("");
+    }
 }

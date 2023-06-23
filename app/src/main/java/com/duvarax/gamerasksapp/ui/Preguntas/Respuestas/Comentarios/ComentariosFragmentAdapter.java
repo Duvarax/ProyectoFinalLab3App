@@ -55,7 +55,7 @@ public class ComentariosFragmentAdapter extends RecyclerView.Adapter<Comentarios
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("comentario", listaComentarios.get(position));
-                Navigation.findNavController(activity,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_comentarios, bundle);
+                Navigation.findNavController(activity,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_detalle_comentario, bundle);
             }
         });
     }

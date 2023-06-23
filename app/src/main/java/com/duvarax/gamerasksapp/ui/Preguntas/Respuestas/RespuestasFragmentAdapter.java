@@ -49,24 +49,34 @@ public class RespuestasFragmentAdapter extends RecyclerView.Adapter<RespuestasFr
 
     @Override
     public void onBindViewHolder(@NonNull RespuestasFragmentAdapter.ViewHolder holder, int position) {
+
         Glide.with(context)
                 .load(listaRespuestas.get(position).getUsuario().getImagen())
                 .into(holder.imagenUsuario);
-        holder.ibValorar.setImageResource(R.drawable.likent_icon);
+
+        if(listaRespuestas.get(position).getValorada()){
+            Glide.with(context)
+                    .load(R.drawable.like_icon).into(holder.ibValorar);
+        }else{
+            Glide.with(context)
+                    .load(R.drawable.likent_icon).into(holder.ibValorar);
+        }
         holder.ibValorar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.ibValorar.setImageResource(R.drawable.like_icon);
-                mv.valorarRespuesta(listaRespuestas.get(position));
-                holder.ibValorar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        holder.ibValorar.setImageResource(R.drawable.likent_icon);
-                        mv.quitarValoracion(listaRespuestas.get(position));
+                if(listaRespuestas.get(position).getValorada()){
+                    Glide.with(context)
+                            .load(R.drawable.likent_icon).into(holder.ibValorar);
+                    mv.quitarValoracion(listaRespuestas.get(position));
+                }else{
+                    Glide.with(context)
+                            .load(R.drawable.like_icon).into(holder.ibValorar);
+                    mv.valorarRespuesta(listaRespuestas.get(position));
                     }
-                });
-            }
+                }
+
         });
+
         holder.respuesta.setText(listaRespuestas.get(position).getTexto());
         holder.btComentario.setOnClickListener(new View.OnClickListener() {
             @Override

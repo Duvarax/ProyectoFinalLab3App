@@ -136,6 +136,12 @@
         <action
             android:id="@+id/action_navigation_comentarios_to_navigation_respuestas"
             app:destination="@id/navigation_respuestas" />
+        <action
+            android:id="@+id/action_navigation_comentarios_to_navigation_detalle_respuesta"
+            app:destination="@id/navigation_detalle_respuesta" />
+        <action
+            android:id="@+id/action_navigation_comentarios_to_navigation_detalle_comentario"
+            app:destination="@id/navigation_detalle_comentario" />
     </fragment>
     <fragment
         android:id="@+id/navigation_detalle_pregunta"
@@ -148,5 +154,21 @@
         <action
             android:id="@+id/action_navigation_detalle_pregunta_to_navigation_preguntas_x_juego"
             app:destination="@id/navigation_preguntas_x_juego" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_detalle_respuesta"
+        android:name="com.duvarax.gamerasksapp.ui.Preguntas.Respuestas.DetalleRespuestaFragment"
+        android:label="Detalle" >
+        <action
+            android:id="@+id/action_navigation_detalle_respuesta_to_navigation_comentarios"
+            app:destination="@id/navigation_comentarios" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_detalle_comentario"
+        android:name="com.duvarax.gamerasksapp.ui.Preguntas.Respuestas.Comentarios.DetalleComentarioFragment"
+        android:label="Detalle" >
+        <action
+            android:id="@+id/action_navigation_detalle_comentario_to_navigation_comentarios"
+            app:destination="@id/navigation_comentarios" />
     </fragment>
 </navigation>

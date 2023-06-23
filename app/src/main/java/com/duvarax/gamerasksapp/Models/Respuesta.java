@@ -9,13 +9,16 @@ public class Respuesta implements Serializable {
     private Usuario usuario;
     private Pregunta pregunta;
 
+    private Boolean valorada;
 
-    public Respuesta(int id, String texto, String fechaCreacion, Usuario usuario, Pregunta pregunta) {
+
+    public Respuesta(int id, String texto, String fechaCreacion, Usuario usuario, Pregunta pregunta, Boolean valorada) {
         this.id = id;
         this.texto = texto;
         this.fechaCreacion = fechaCreacion;
         this.usuario = usuario;
         this.pregunta = pregunta;
+        this.valorada = valorada;
     }
 
     public int getId() {
@@ -56,5 +59,13 @@ public class Respuesta implements Serializable {
 
     public void setPregunta(Pregunta pregunta) {
         this.pregunta = pregunta;
+    }
+
+    public Boolean getValorada() {
+        return valorada;
+    }
+
+    public void setValorada(Boolean valorada) {
+        this.valorada = valorada;
     }
 }

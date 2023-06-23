@@ -19,12 +19,14 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public class ApiClient {
     private static final String PATH="http://192.168.0.10:5200/";
@@ -99,6 +101,10 @@ public class ApiClient {
         @POST("Juego/buscar")
         Call<ArrayList<Juego>> buscarJuegos(@Header("Authorization") String token, @Body JuegoBuscar juego);
 
+        @POST("Valoracion/guardar")
+        Call<Integer> altaValoracion(@Header("Authorization") String token, @Body Respuesta respuesta);
 
+        @DELETE("Valoracion/eliminar/{id}")
+        Call<Integer> bajaValoracion(@Header("Authorization") String token, @Path("id") int idRespuesta);
     }
 }

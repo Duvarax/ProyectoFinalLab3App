@@ -16,11 +16,13 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.navigation.Navigation;
 
 import com.duvarax.gamerasksapp.Models.Imagen;
 import com.duvarax.gamerasksapp.Models.Juego;
 import com.duvarax.gamerasksapp.Models.Pregunta;
 import com.duvarax.gamerasksapp.Models.Usuario;
+import com.duvarax.gamerasksapp.R;
 import com.duvarax.gamerasksapp.Request.ApiClient;
 
 import java.io.ByteArrayOutputStream;
@@ -39,10 +41,11 @@ public class HacerPreguntaViewModel extends AndroidViewModel {
     private Context context;
 
     private MutableLiveData<Juego> juegoMutable;
-    private MutableLiveData<Integer> envioSatisfactorioMutable;
+    private MutableLiveData<Boolean> envioSatisfactorioMutable;
     private MutableLiveData<String> capturaMutable;
     public String urlCaptura = "";
     public String publicIdCaptura = "";
+
     public HacerPreguntaViewModel(@NonNull Application application) {
         super(application);
         context = application.getApplicationContext();
@@ -54,7 +57,7 @@ public class HacerPreguntaViewModel extends AndroidViewModel {
         }
         return juegoMutable;
     }
-    public LiveData<Integer> getEnvioSatisfactorio(){
+    public LiveData<Boolean> getEnvioSatisfactorio(){
         if(envioSatisfactorioMutable == null){
             envioSatisfactorioMutable = new MutableLiveData<>();
         }
@@ -85,7 +88,8 @@ public class HacerPreguntaViewModel extends AndroidViewModel {
                     if(response.body() != null){
                         Log.d("salida", response.body().getTexto());
                         Toast.makeText(context, "Pregunta creada", Toast.LENGTH_SHORT).show();
-                        }
+                        envioSatisfactorioMutable.setValue(true);
+                    }
                     }else{
                         Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                     }
@@ -156,15 +160,5 @@ public class HacerPreguntaViewModel extends AndroidViewModel {
         return filePath;
     }
 
-    private byte[] getBytesFromInputStream(InputStream inputStream) throws IOException {
-        byte[] buffer = new byte[4096];
-        int bytesRead;
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
 
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            output.write(buffer, 0, bytesRead);
-        }
-
-        return output.toByteArray();
-    }
 }

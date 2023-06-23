@@ -12,12 +12,13 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="@font/st_simplesquare"
         android:text="Detalle"
         android:textColor="@color/yellowMain"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,14 +26,14 @@
         android:id="@+id/constraintLayout9"
         android:layout_width="383dp"
         android:layout_height="47dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/rounded_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView15">
 
         <TextView
-            android:id="@+id/tvPreguntaDetallePregunta"
+            android:id="@+id/tvRespuestaDetalleRespuesta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/oswald_regular"
@@ -49,7 +50,7 @@
         android:id="@+id/constraintLayout12"
         android:layout_width="383dp"
         android:layout_height="151dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +70,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ivImagenUsuarioDetallePregunta"
+            android:id="@+id/ivImagenUsuarioDetalleRespuesta"
             android:layout_width="125dp"
             android:layout_height="125dp"
             android:layout_marginEnd="16dp"
@@ -79,7 +80,7 @@
             tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/tvNicknameUsuarioDetallePregunta"
+            android:id="@+id/tvNicknameUsuarioDetalleRespuesta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -97,12 +98,13 @@
         android:id="@+id/textView27"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="@font/oswald_regular"
-        android:text="Juego"
+        android:text="Respuesta"
         android:textColor="@color/yellowMain"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout12" />
 
@@ -110,7 +112,7 @@
         android:id="@+id/textView321321"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/oswald_regular"
         android:text="Usuario"
         android:textColor="@color/yellowMain"
@@ -118,7 +120,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivCapturaDetallePregunta" />
+        app:layout_constraintTop_toBottomOf="@+id/tvFechaCreacionDetalleRespuesta" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="383dp"
@@ -133,7 +135,7 @@
         app:layout_constraintVertical_bias="0.033">
 
         <ImageView
-            android:id="@+id/ivJuegoPortadaDetallePregunta"
+            android:id="@+id/ivUsuarioRespuestaDetalleRespuesta"
             android:layout_width="126dp"
             android:layout_height="122dp"
             android:layout_marginStart="16dp"
@@ -149,15 +151,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/oswald_regular"
-            android:text="Nombre"
+            android:text="Respuesta:"
             android:textColor="@color/black"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivJuegoPortadaDetallePregunta"
+            app:layout_constraintStart_toEndOf="@+id/ivUsuarioRespuestaDetalleRespuesta"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvNombreJuegoDetallePregunta"
+            android:id="@+id/tvRespuestaDetalleComentario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -184,7 +186,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout9" />
 
     <TextView
-        android:id="@+id/tvFechaCreacionDetallePregunta"
+        android:id="@+id/tvFechaCreacionDetalleRespuesta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -196,25 +198,4 @@
         app:layout_constraintStart_toEndOf="@+id/textView31"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout9" />
 
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:fontFamily="@font/oswald_regular"
-        android:text="Captura:"
-        android:textColor="@color/white"
-        android:textSize="14dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView31"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <ImageView
-        android:id="@+id/ivCapturaDetallePregunta"
-        android:layout_width="105dp"
-        android:layout_height="94dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/tvFechaCreacionDetallePregunta"
-        tools:src="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>

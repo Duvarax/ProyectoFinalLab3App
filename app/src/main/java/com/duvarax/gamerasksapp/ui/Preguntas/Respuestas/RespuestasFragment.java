@@ -51,8 +51,7 @@ public class RespuestasFragment extends Fragment {
                 binding.btnDetallePregunta.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //hacer detalle pregunta
-                        //Navigation.findNavController(getActivity(),R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_pre, bundle);
+                        Navigation.findNavController(getActivity(),R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_detalle_pregunta, bundle);
                     }
                 });
             }
@@ -75,6 +74,7 @@ public class RespuestasFragment extends Fragment {
                 mv.altaRespuesta(binding.etRespuesta.getText().toString());
             }
         });
+
 
         mv.setListaRespuestasMutable(pregunta);
         mv.setPreguntaMutable(pregunta);

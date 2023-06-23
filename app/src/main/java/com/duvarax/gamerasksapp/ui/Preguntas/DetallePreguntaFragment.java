@@ -45,6 +45,7 @@ public class DetallePreguntaFragment extends Fragment {
                 binding.tvNombreJuegoDetallePregunta.setText(pregunta.getJuego().getNombre());
                 Glide.with(getContext()).load(pregunta.getUsuario().getImagen()).into(binding.ivImagenUsuarioDetallePregunta);
                 Glide.with(getContext()).load(pregunta.getJuego().getPortada()).into(binding.ivJuegoPortadaDetallePregunta);
+                Glide.with(getContext()).load(pregunta.getCaptura()).into(binding.ivCapturaDetallePregunta);
             }
         });
 

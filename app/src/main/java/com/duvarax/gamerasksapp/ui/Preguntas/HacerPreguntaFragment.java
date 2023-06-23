@@ -77,9 +77,9 @@ public class HacerPreguntaFragment extends Fragment {
             }
         });
 
-        mv.getEnvioSatisfactorio().observe(getActivity(), new Observer<Integer>() {
+        mv.getEnvioSatisfactorio().observe(getActivity(), new Observer<Boolean>() {
             @Override
-            public void onChanged(Integer integer) {
+            public void onChanged(Boolean bool) {
                 Navigation.findNavController(getActivity(),R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_preguntas_x_juego, data);
             }
         });
@@ -98,6 +98,7 @@ public class HacerPreguntaFragment extends Fragment {
                 mv.enviarPregunta(binding.etPregunta.getText().toString());
             }
         });
+
 
         mv.obtenerJuego(juego);
 
