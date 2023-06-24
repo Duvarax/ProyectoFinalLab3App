@@ -83,6 +83,8 @@ public class ApiClient {
         Call<Imagen> getCaptura(@Header("Authorization") String token, @Part MultipartBody.Part captura);
         @POST("Pregunta/juego")
         Call<ArrayList<Pregunta>> obtenerPreguntasXJuego(@Header("Authorization") String token, @Body Juego juego);
+        @DELETE("Pregunta/eliminar/{id}")
+        Call<Integer> bajaPregunta(@Header("Authorization") String token, @Path("id") int id);
 
         @POST("Respuesta")
         Call<ArrayList<Respuesta>> obtenerRespuestasDePregunta(@Header("Authorization") String token, @Body Pregunta pregunta);

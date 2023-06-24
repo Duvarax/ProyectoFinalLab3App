@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,36 @@ public class DetallePreguntaFragment extends Fragment {
                 Glide.with(getContext()).load(pregunta.getUsuario().getImagen()).into(binding.ivImagenUsuarioDetallePregunta);
                 Glide.with(getContext()).load(pregunta.getJuego().getPortada()).into(binding.ivJuegoPortadaDetallePregunta);
                 Glide.with(getContext()).load(pregunta.getCaptura()).into(binding.ivCapturaDetallePregunta);
+                binding.ivCapturaDetallePregunta.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mv.setUrlCapturaMutable(pregunta.getCaptura());
+                    }
+                });
+            }
+        });
+
+        mv.getUrl().observe(getActivity(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("captura", s);
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_captura_ver, bundle1);
+            }
+        });
+
+        mv.getEliminarPreguntaMutable().observe(getActivity(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_preguntas);
+            }
+        });
+
+
+        binding.btnDetallePreguntaEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mv.bajaPregunta(pregunta);
             }
         });
 

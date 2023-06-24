@@ -121,16 +121,17 @@
         app:layout_constraintTop_toBottomOf="@+id/ivCapturaDetallePregunta" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout13"
         android:layout_width="383dp"
         android:layout_height="130dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
         android:background="@drawable/rounded_border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView27"
-        app:layout_constraintVertical_bias="0.033">
+        app:layout_constraintVertical_bias="0.0">
 
         <ImageView
             android:id="@+id/ivJuegoPortadaDetallePregunta"
@@ -176,10 +177,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Fecha de creacion:"
-        android:textSize="14dp"
-        android:textColor="@color/white"
         android:fontFamily="@font/oswald_regular"
+        android:text="Fecha de creacion:"
+        android:textColor="@color/white"
+        android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout9" />
 
@@ -189,10 +190,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
-        android:textSize="14dp"
-        android:textColor="@color/white"
         android:fontFamily="@font/oswald_regular"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="14dp"
         app:layout_constraintStart_toEndOf="@+id/textView31"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout9" />
 
@@ -200,13 +201,14 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="56dp"
         android:fontFamily="@font/oswald_regular"
         android:text="Captura:"
         android:textColor="@color/white"
         android:textSize="14dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView31"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
     <ImageView
         android:id="@+id/ivCapturaDetallePregunta"
@@ -217,4 +219,20 @@
         app:layout_constraintStart_toEndOf="@+id/textView19"
         app:layout_constraintTop_toBottomOf="@+id/tvFechaCreacionDetallePregunta"
         tools:src="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/btnDetallePreguntaEliminar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="@color/crimson"
+        android:fontFamily="@font/oswald_regular"
+        android:text="Eliminar pregunta"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.407"
+        app:layout_constraintStart_toEndOf="@+id/tvFechaCreacionDetallePregunta"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout9" />
 </androidx.constraintlayout.widget.ConstraintLayout>
