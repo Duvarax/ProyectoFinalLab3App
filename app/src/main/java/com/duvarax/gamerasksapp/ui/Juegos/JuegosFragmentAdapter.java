@@ -48,7 +48,6 @@ public class JuegosFragmentAdapter extends RecyclerView.Adapter<JuegosFragmentAd
         holder.imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Enviar al juego", Toast.LENGTH_SHORT).show();
                 Bundle juego = new Bundle();
                 juego.putSerializable("juego", listaJuegos.get(position));
                 Navigation.findNavController(activity,R.id.nav_host_fragment_activity_menu).navigate(R.id.navigation_detalle_juego, juego);
